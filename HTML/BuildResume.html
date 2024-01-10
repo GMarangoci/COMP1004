@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Build Your Resume - Resume Builder</title>
+    <link rel="stylesheet" href="../CSS/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo-container">
+                <img src="../Images/logo.png" alt="Resume Builder Logo" class="logo">
+            </div>
+            <nav class="navigation">
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="Homepage.html" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="build-resume.html" class="nav-link">Build Resume</a></li>
+                    <li class="nav-item"><a href="Templates.html" class="nav-link">Templates</a></li>
+                    <li class="nav-item"><a href="#about" class="nav-link">About Us</a></li>
+                    <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <section class="hero">
+                <h1 class="hero-title">Build Your Professional Resume</h1>
+                <p class="hero-description">Customize and download your professional resume in minutes.</p>
+            </section>
+
+            <section class="resume-builder">
+                <form class="resume-form">
+                    <!-- Personal Information Section -->
+                    <fieldset>
+                        <legend>Personal Information</legend>
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" required>
+
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+
+                        <label for="phone">Phone:</label>
+                        <input type="tel" id="phone" name="phone" required>
+
+                        <!-- More fields as necessary -->
+                    </fieldset>
+
+                    <!-- Experience Section -->
+                    <fieldset>
+                        <legend>Professional Experience</legend>
+                        <!-- Dynamic experience fields -->
+                        <!-- Probably will be using JavaScript and add more fields -->
+                    </fieldset>
+
+                    <!-- Education Section -->
+                    <fieldset>
+                        <legend>Education</legend>
+                        <!-- Dynamic education fields -->
+                    </fieldset>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn cta">Download Resume</button>
+                </form>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p class="footer-text">&copy; 2024 Resume Builder COMP1004 Project. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+
+</html>
