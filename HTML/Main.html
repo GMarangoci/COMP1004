@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- General: Setting up the character encoding, viewport and linking the stylesheet. -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Builder</title>
+    <link rel="stylesheet" href="../CSS/style.css">
+</head>
+
+<body>
+    <!-- General: Container for the entire content of the page. -->
+    <div class="container">
+        <!-- General: Header section containing the logo and navigation menu. -->
+        <header class="header">
+            <!-- Logo of the website. -->
+            <div class="logo-container">
+                <img src="../Images/logo.png" alt="Resume Builder Logo" class="logo">
+            </div>
+            <!-- Navigation bar with links to different pages. -->
+            <nav class="navigation">
+                <ul class="nav-list">
+                    <!-- Navigation links, using onclick event to navigate to different sections. -->
+                    <li class="nav-item"><a href="#" class="nav-link"
+                            onclick="navigateTo('home'); return false;">Home</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link"
+                            onclick="navigateTo('buildResume'); return false;">Build Resume</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link" onclick="navigateTo('logIn'); return false;">Log
+                            In</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Home Section: The default view of the website, visible when users first visit. -->
+        <main id="home" class="page-section">
+            <!-- Introduction and welcome message. -->
+            <section class="hero">
+                <h1 class="hero-title">Build Your Professional Resume</h1>
+                <p class="hero-description">Join thousands of others who have created their resumes easily with our
+                    tool.</p>
+                <!-- Button to navigate to the Build Resume section. -->
+                <button id="get-started" class="btn cta" onclick="navigateTo('buildResume'); return false;">Get
+                    Started</button>
+            </section>
+
+            <!-- Additional features or information sections. -->
+            <section id="create" class="feature">
+                <h2 class="feature-title">Build Resume</h2>
+                <p class="feature-description">Start building your professional resume quickly and easily with our
+                    step-by-step guide.</p>
+            </section>
+            <section id="templates" class="feature">
+                <h2 class="feature-title">Browse Our Templates</h2>
+                <p class="feature-description">Choose from a variety of customizable, professional templates.</p>
+            </section>
+        </main>
+
+        <!-- Build Resume Section: Hidden by default, shown when 'Build Resume' is clicked. -->
+        <main id="buildResume" class="page-section" style="display: none;">
+            <section class="hero">
+                <h1 class="hero-title">Build Your Professional Resume</h1>
+                <p class="hero-description">Customize and download your professional resume in minutes.</p>
+            </section>
+            <!-- Form for building the resume. -->
+            <section class="resume-builder">
+                <form class="resume-form" id="resume-form">
+                    <!-- Section for entering personal information. -->
+                    <fieldset>
+                        <legend>Personal Information</legend>
+                        <label for="full-name">Full Name:</label>
+                        <input type="text" id="full-name" name="full-name" required>
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                        <label for="phone">Phone:</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </fieldset>
+                    <!-- Section for adding work experience. -->
+                    <fieldset>
+                        <legend>Work Experience</legend>
+                        <div id="work-experience-section">
+                            <!-- Placeholder for dynamically added work experience fields. -->
+                        </div>
+                        <button type="button" id="add-experience" class="btn">Add Experience</button>
+                    </fieldset>
+                    <!-- Section for adding educational details. -->
+                    <fieldset>
+                        <legend>Education</legend>
+                        <div id="education-section">
+                            <!-- Placeholder for dynamically added education fields. -->
+                        </div>
+                        <button type="button" id="add-education" class="btn">Add Education</button>
+                    </fieldset>
+                    <!-- Options to choose a template for the resume. -->
+                    <div class="template-selection">
+                        <button type="button" id="modern-template" class="btn">Modern Template</button>
+                        <button type="button" id="minimalistic-template" class="btn">Minimalistic Template</button>
+                    </div>
+                    <!-- Placeholder for displaying the chosen resume template. -->
+                    <div id="resume-display" class="resume-display"></div>
+                </form>
+            </section>
+        </main>
+
+        <!-- Log In Section: Hidden by default, shown when 'Log In' is clicked. -->
+        <main id="logIn" class="page-section" style="display: none;">
+            <!-- Form for logging in. -->
+            <section class="login-container">
+                <h1 class="login-title">Log In to Your Account</h1>
+                <form class="login-form">
+                    <label for="login-email">Email:</label>
+                    <input type="email" id="login-email" name="login-email" required>
+                    <label for="login-password">Password:</label>
+                    <input type="password" id="login-password" name="login-password" required>
+                    <button type="submit" class="btn">Log In</button>
+                    <!-- Link to navigate to the registration section. -->
+                    <p class="register-prompt">
+                        Don't have an account? <a href="#" class="nav-link"
+                            onclick="navigateTo('register'); return false;">Register here</a>
+                    </p>
+                </form>
+            </section>
+        </main>
+
+        <!-- General: Footer of the website. -->
+        <footer class="footer"></footer>
+    </div>
+
+    <!-- General: Link to the JavaScript file. -->
+    <script src="../javascript.js"></script>
+</body>
+
+</html>

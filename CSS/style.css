@@ -1,3 +1,4 @@
+/* General: Resetting default margin and padding for the entire page and setting a global font and background color. */
 body, html {
     margin: 0;
     padding: 0;
@@ -7,11 +8,16 @@ body, html {
     text-rendering: optimizeLegibility;
 }
 
+/* General: Styling for the main container that wraps around everything inside body. */
+/* Make the container responsive */
 .container {
-    max-width: 1200px;
-    margin: auto;
+    width: 100%; /* Make the container width responsive */
+    max-width: 100%; /* Limit the width to 100% of the viewport width */
+    max-height: 100vh; /* Make the container's minimum height fill 100% of the viewport's height */
+    margin: 0 auto; /* Center the container */
 }
 
+/* General: Styling for the header section, including layout, background color, and shadow. */
 .header {
     display: flex;
     justify-content: space-between;
@@ -22,15 +28,18 @@ body, html {
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
+/* General: Styling for the container holding the logo. */
 .logo-container {
     display: flex;
     align-items: center;
 }
 
+/* General: Styling for the website's logo. */
 .logo {
     height: 60px;
 }
 
+/* Navigation: Styles for the navigation list. */
 .navigation .nav-list {
     display: flex;
     list-style: none;
@@ -38,10 +47,12 @@ body, html {
     padding: 0;
 }
 
+/* Navigation: Left margin for navigation items. */
 .navigation .nav-item {
     margin-left: 20px;
 }
 
+/* Navigation: Styling for navigation links including color, decoration, padding, and transition effects. */
 .navigation .nav-link {
     color: #fff;
     text-decoration: none;
@@ -50,11 +61,13 @@ body, html {
     transition: background-color 0.3s, color 0.3s;
 }
 
+/* Navigation: Hover effect for navigation links. */
 .navigation .nav-link:hover {
     background-color: #0d2f4b;
     color: #ffffff;
 }
 
+/* Hero Section: Styling for the hero section including text alignment, padding, background, and shadow. */
 .hero {
     text-align: center;
     padding: 4rem 2rem;
@@ -64,17 +77,20 @@ body, html {
     margin: 2rem 0;
 }
 
+/* Hero Section: Styling for the hero title. */
 .hero-title {
     color: #123456;
     font-size: 2.5rem;
     margin-bottom: 1rem;
 }
 
+/* Hero Section: Styling for the hero description text. */
 .hero-description {
     font-size: 1.2rem;
     margin-bottom: 2rem;
 }
 
+/* General: Button styling used throughout the website. */
 .btn {
     background-color: #ff6b6b;
     color: #fff;
@@ -86,26 +102,31 @@ body, html {
     transition: background-color 0.3s;
 }
 
+/* General: Hover effect for buttons. */
 .btn.cta:hover {
     background-color: #e55a5a;
 }
 
+/* Feature Section: Styling for feature sections on the homepage. */
 .feature {
     margin: 2rem 0;
     text-align: center;
 }
 
+/* Feature Section: Styling for feature titles. */
 .feature-title {
     font-size: 1.8rem;
     color: #123456;
     margin-bottom: 1rem;
 }
 
+/* Feature Section: Styling for feature descriptions. */
 .feature-description {
     font-size: 1rem;
     margin-bottom: 2rem;
 }
 
+/* Footer: Styling for the footer section. */
 .footer {
     background-color: #123456;
     color: white;
@@ -116,6 +137,66 @@ body, html {
     width: 100%;
 }
 
+/* Footer: Styles for text within the footer. */
 .footer-text {
     margin: 0;
 }
+
+/* Log In Section: Styling for the login container. */
+.login-container {
+    margin: 2rem auto;
+    padding: 2rem;
+    max-width: 400px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Log In Section: Styling for the login title. */
+.login-title {
+    text-align: center;
+    color: #123456;
+    margin-bottom: 1rem;
+}
+
+/* Log In Section: Styles for the login form layout. */
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Log In Section: Margin styling for labels in the login form. */
+.login-form label {
+    margin-top: 1rem;
+}
+
+/* Log In Section: Styling for input fields in the login form. */
+.login-form input {
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* Log In Section: Styling for the registration prompt. */
+.register-prompt {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+/* Log In Section: Styling for links in the registration prompt. */
+.register-prompt a {
+    color: #ff6b6b;
+    text-decoration: none;
+}
+
+/* Log In Section: Hover effect for links in the registration prompt. */
+.register-prompt a:hover {
+    text-decoration: underline;
+}
+
+/* Resume Display: Styling for the section where the resume is displayed. */
+.resume-display {
+    margin-top: 2rem;
+}
+
