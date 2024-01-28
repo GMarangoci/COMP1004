@@ -1,4 +1,4 @@
-/* General: Resetting default margin and padding for the entire page and setting a global font and background color. */
+/* GENERAL STYLES - APPLY GLOBALLY */
 body, html {
     margin: 0;
     padding: 0;
@@ -8,16 +8,14 @@ body, html {
     text-rendering: optimizeLegibility;
 }
 
-/* General: Styling for the main container that wraps around everything inside body. */
-/* Make the container responsive */
 .container {
-    width: 100%; /* Make the container width responsive */
-    max-width: 100%; /* Limit the width to 100% of the viewport width */
-    max-height: 100vh; /* Make the container's minimum height fill 100% of the viewport's height */
-    margin: 0 auto; /* Center the container */
+    width: 100%;
+    max-width: 100%;
+    max-height: 100vh;
+    margin: 0 auto;
 }
 
-/* General: Styling for the header section, including layout, background color, and shadow. */
+/* HEADER STYLES - USED ON ALL PAGES */
 .header {
     display: flex;
     justify-content: space-between;
@@ -28,18 +26,16 @@ body, html {
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
-/* General: Styling for the container holding the logo. */
 .logo-container {
     display: flex;
     align-items: center;
 }
 
-/* General: Styling for the website's logo. */
 .logo {
     height: 60px;
 }
 
-/* Navigation: Styles for the navigation list. */
+/* NAVIGATION STYLES - USED ON ALL PAGES */
 .navigation .nav-list {
     display: flex;
     list-style: none;
@@ -47,12 +43,10 @@ body, html {
     padding: 0;
 }
 
-/* Navigation: Left margin for navigation items. */
 .navigation .nav-item {
     margin-left: 20px;
 }
 
-/* Navigation: Styling for navigation links including color, decoration, padding, and transition effects. */
 .navigation .nav-link {
     color: #fff;
     text-decoration: none;
@@ -61,13 +55,12 @@ body, html {
     transition: background-color 0.3s, color 0.3s;
 }
 
-/* Navigation: Hover effect for navigation links. */
 .navigation .nav-link:hover {
     background-color: #0d2f4b;
     color: #ffffff;
 }
 
-/* Hero Section: Styling for the hero section including text alignment, padding, background, and shadow. */
+/* HERO SECTION STYLES - HOME PAGE */
 .hero {
     text-align: center;
     padding: 4rem 2rem;
@@ -77,20 +70,19 @@ body, html {
     margin: 2rem 0;
 }
 
-/* Hero Section: Styling for the hero title. */
 .hero-title {
     color: #123456;
     font-size: 2.5rem;
     margin-bottom: 1rem;
 }
 
-/* Hero Section: Styling for the hero description text. */
 .hero-description {
     font-size: 1.2rem;
     margin-bottom: 2rem;
+    font-family: 'Arial', sans-serif; /* Matching font with the desired style */
 }
 
-/* General: Button styling used throughout the website. */
+/* BUTTON STYLES - USED ON ALL PAGES */
 .btn {
     background-color: #ff6b6b;
     color: #fff;
@@ -102,31 +94,28 @@ body, html {
     transition: background-color 0.3s;
 }
 
-/* General: Hover effect for buttons. */
 .btn.cta:hover {
     background-color: #e55a5a;
 }
 
-/* Feature Section: Styling for feature sections on the homepage. */
+/* FEATURE SECTION STYLES - HOME PAGE */
 .feature {
     margin: 2rem 0;
     text-align: center;
 }
 
-/* Feature Section: Styling for feature titles. */
 .feature-title {
     font-size: 1.8rem;
     color: #123456;
     margin-bottom: 1rem;
 }
 
-/* Feature Section: Styling for feature descriptions. */
 .feature-description {
     font-size: 1rem;
     margin-bottom: 2rem;
 }
 
-/* Footer: Styling for the footer section. */
+/* FOOTER STYLES - USED ON ALL PAGES */
 .footer {
     background-color: #123456;
     color: white;
@@ -137,12 +126,11 @@ body, html {
     width: 100%;
 }
 
-/* Footer: Styles for text within the footer. */
 .footer-text {
     margin: 0;
 }
 
-/* Log In Section: Styling for the login container. */
+/* LOGIN SECTION STYLES - LOGIN PAGE */
 .login-container {
     margin: 2rem auto;
     padding: 2rem;
@@ -152,25 +140,21 @@ body, html {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Log In Section: Styling for the login title. */
 .login-title {
     text-align: center;
     color: #123456;
     margin-bottom: 1rem;
 }
 
-/* Log In Section: Styles for the login form layout. */
 .login-form {
     display: flex;
     flex-direction: column;
 }
 
-/* Log In Section: Margin styling for labels in the login form. */
 .login-form label {
     margin-top: 1rem;
 }
 
-/* Log In Section: Styling for input fields in the login form. */
 .login-form input {
     padding: 0.5rem;
     margin-top: 0.5rem;
@@ -178,25 +162,191 @@ body, html {
     border: 1px solid #ccc;
 }
 
-/* Log In Section: Styling for the registration prompt. */
 .register-prompt {
     text-align: center;
     margin-top: 1rem;
 }
 
-/* Log In Section: Styling for links in the registration prompt. */
 .register-prompt a {
     color: #ff6b6b;
     text-decoration: none;
 }
 
-/* Log In Section: Hover effect for links in the registration prompt. */
 .register-prompt a:hover {
     text-decoration: underline;
 }
 
-/* Resume Display: Styling for the section where the resume is displayed. */
+/* RESUME BUILDER SECTION STYLES - RESUME BUILDER PAGE */
 .resume-display {
-    margin-top: 2rem;
+    margin-top: 3rem;
+    padding: 2rem; /* Increased padding for a spacious feel */
+    background-color: #ffffff; /* Clean white background */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Adding subtle shadow for depth */
+    border-radius: 10px; /* More pronounced rounded corners */
 }
 
+/* Styling for each fieldset in the resume form */
+.resume-form fieldset {
+    margin-bottom: 3rem; /* Added space between each section */
+    padding: 1.5rem; /* Padding for layout */
+    border-radius: 8px; /* Rounded borders for modern look */
+    border: 1px solid #ddd; /* Border color for subtle definition */
+}
+
+/* Styling for the title of each section in the resume form */
+.resume-form legend {
+    font-size: 1.4rem; /* Font size for section titles */
+    margin-bottom: 1.5rem; /* Space below titles */
+    color: #123456; /* Color to match with hero-title */
+    font-weight: bold; /* Bold font for emphasis */
+}
+
+/* Styling for input and textarea fields */
+.resume-form input,
+.resume-form textarea {
+    width: 100%;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem; /* Space below each field */
+    padding: 0.75rem; /* Padding for text visibility */
+    border: 1px solid #ccc; /* Border color for definition */
+    border-radius: 5px; /* Rounded borders for inputs and textareas */
+    font-family: 'Arial', sans-serif; /* Font family for clean readability */
+    font-size: 1rem; /* Font size for legibility */
+}
+
+/* Styling for buttons in the resume form */
+.resume-form button {
+    margin-top: 1rem; /* Space above the button */
+    background-color: #ff6b6b; /* Background color for primary actions */
+    color: white; /* Text color for contrast */
+    border: none; /* No border for buttons */
+    padding: 0.75rem 1.5rem; /* Padding for larger clickable area */
+    border-radius: 5px; /* Rounded borders for buttons */
+    cursor: pointer; /* Cursor pointer for button interactivity */
+    font-size: 1rem; /* Font size for consistency with input fields */
+}
+
+/* Specific styling for 'Add Education' button */
+.resume-form .add-button {
+    /* Inherits styles from .resume-form button */
+    /* Additional or overriding styles can be added here if necessary */
+}
+
+/* Specific styling for 'Remove' button for secondary actions */
+.resume-form .remove-button {
+    background-color: #ffcccc; /* Lighter red for secondary actions like removal */
+    color: #333; /* Color for text to maintain readability */
+    padding: 0.5rem 1rem; /* Smaller padding for a less prominent button */
+    margin-top: 1rem; /* Space above the 'Remove' button */
+    margin-bottom: 2rem; /* Space below the 'Remove' button */
+    font-size: 0.85rem; /* Smaller font size for secondary action buttons */
+}
+
+/* Hover effect for 'Remove' button */
+.resume-form .remove-button:hover {
+    background-color: #ffaaaa; /* Darker shade on hover for interaction feedback */
+}
+
+/* Styling for template selection buttons in the resume form */
+.template-selection .btn {
+    margin: 1rem 0.5rem; /* Horizontal space around each template button */
+    padding: 1rem 1.5rem; /* Padding for a substantial feel */
+    font-size: 1.1rem; /* Font size for readability */
+}
+
+/* RESPONSIVE STYLES - USED ON ALL PAGES */
+@media (max-width: 768px) {
+    .resume-display {
+        padding: 1.5rem; /* Adjust padding for smaller screens */
+    }
+
+    .template-selection {
+        margin-top: 4rem; /* Adjust top margin for smaller screens */
+        grid-template-columns: 1fr; /* Adjust template grid for single column layout */
+    }
+}
+
+
+/* MODERN TEMPLATE STYLES */
+
+.modern {
+    font-family: 'Roboto', sans-serif; /* Using Roboto for a modern and clean look */
+    color: #333; /* Standard text color for good readability */
+    background-color: #fff; /* White background for a clean design */
+    max-width: 800px; /* Limiting the width for better layout control */
+    margin: 20px auto; /* Centering the template on the page with some vertical spacing */
+    padding: 20px; /* Adding padding for some space inside the elements */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for a subtle 3D effect */
+}
+
+/* Styling for the header section of the Modern Template */
+.modern-header {
+    background: linear-gradient(45deg, #6D5ACF 0%, #1A74BA 100%); /* Gradient background for visual appeal */
+    color: white; /* White text to contrast against the background */
+    padding: 30px 20px; /* Generous padding for spacing */
+    text-align: left; /* Aligning the header text to the left */
+}
+
+.modern-header h1 {
+    font-size: 2.8rem; /* Larger font size for the main header */
+    font-weight: 700; /* Bold font weight for emphasis */
+    margin: 0; /* Removing the default margin */
+}
+
+/* General section styling for the Modern Template */
+.modern .section {
+    background-color: #fff; /* Keeping sections white for a clean look */
+    margin: 20px 0; /* Spacing out each section */
+    padding: 20px; /* Padding inside each section */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    border-radius: 8px; /* Rounded corners for a modern feel */
+}
+
+.modern .contact-info i {
+    display: inline-block; /* Icons are inline with text */
+    margin-right: 10px; /* Space between icon and text */
+    color: #6D5ACF; /* Using a color accent for icons */
+}
+
+/* MINIMALISTIC TEMPLATE STYLES */
+
+.minimalistic {
+    font-family: 'Helvetica Neue', 'Segoe UI', Arial, sans-serif; /* Clean and elegant font choice */
+    color: #333; /* Dark grey text for readability */
+    background-color: #fff; /* White background for minimalistic look */
+    max-width: 800px; /* Consistent width with the Modern template */
+    margin: 20px auto; /* Centered on page with vertical spacing */
+    padding: 25px; /* Slightly more padding than Modern template for airy feel */
+}
+
+/* Header styling for the Minimalistic Template */
+.minimalistic-header {
+    text-align: center; /* Center-aligning header content */
+    padding: 20px 0; /* Padding around the header */
+}
+
+.minimalistic-header h1 {
+    font-size: 2.5rem; /* Large font size for header */
+    color: black; /* Using black for a strong, clear header */
+    margin-bottom: 0.25em; /* Less space below the header for compact look */
+}
+
+/* Styling for each section in the Minimalistic Template */
+.minimalistic-section {
+    margin-bottom: 25px; /* Spacing between sections */
+    padding-bottom: 10px; /* Padding at the bottom of each section */
+}
+
+.minimalistic-section-title {
+    font-size: 1.25rem; /* Moderately large font for section titles */
+    margin-bottom: 10px; /* Space below the title */
+    padding-bottom: 5px; /* Padding below the title for visual separation */
+    border-bottom: 1px solid #ddd; /* Light grey line below the title for subtle division */
+}
+
+.minimalistic .skills-list li,
+.minimalistic .experience-list li,
+.minimalistic .education-list li {
+    margin-bottom: 8px; /* Space between list items */
+    font-size: 0.9rem; /* Slightly smaller font size for list items */
+}
