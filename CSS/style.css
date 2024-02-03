@@ -1,352 +1,557 @@
 /* GENERAL STYLES - APPLY GLOBALLY */
-body, html {
-    margin: 0;
-    padding: 0;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    background-color: #f0f2f5;
-    color: #333;
-    text-rendering: optimizeLegibility;
+body,
+html {
+  margin: 0; /* Removes the default margin around the page */
+  padding: 0; /* Removes the default padding */
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; /* Sets a clean, modern font for the whole page */
+  background-color: #f0f2f5; /* A light grey background color that's easy on the eyes */
+  color: #333; /* A dark grey color for text, for good contrast and readability */
+  text-rendering: optimizeLegibility; /* Helps make text clearer and more readable */
 }
 
 .container {
-    width: 100%;
-    max-width: 100%;
-    max-height: 100vh;
-    margin: 0 auto;
+  width: 100%; /* Makes sure the container takes up the full width of the screen */
+  max-width: 100%; /* Prevents the container from getting wider than the screen */
+  max-height: 100vh; /* Prevents the container from getting taller than the viewport height */
+  margin: 0 auto; /* Centers the container on the page */
 }
 
 /* HEADER STYLES - USED ON ALL PAGES */
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #123456;
-    color: white;
-    padding: 1rem;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  display: flex; /* Uses flexbox for a flexible layout */
+  justify-content: space-between; /* Spaces items in the header evenly */
+  align-items: center; /* Vertically aligns items in the middle */
+  background-color: #123456; /* A deep blue background for the header */
+  color: white; /* White text to stand out against the dark background */
+  padding: 1rem; /* Adds some space inside the header */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* A subtle shadow for a bit of depth */
 }
 
 .logo-container {
-    display: flex;
-    align-items: center;
+  display: flex; /* Flexbox to align the logo properly */
+  align-items: center; /* Centers the logo vertically */
 }
 
 .logo {
-    height: 60px;
+  height: 60px; /* Sets a fixed height for the logo */
 }
 
 /* NAVIGATION STYLES - USED ON ALL PAGES */
 .navigation .nav-list {
-    display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  display: flex; /* Flexbox for horizontal layout of navigation links */
+  list-style: none; /* Removes bullet points from the list */
+  margin: 0; /* Removes default margin */
+  padding: 0; /* Removes default padding */
 }
 
 .navigation .nav-item {
-    margin-left: 20px;
+  margin-left: 20px; /* Adds space between each navigation item */
 }
 
 .navigation .nav-link {
-    color: #fff;
-    text-decoration: none;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    transition: background-color 0.3s, color 0.3s;
+  color: #fff; /* White color for the links */
+  text-decoration: none; /* Removes the underline from links */
+  padding: 0.5rem 1rem; /* Pads the links for easier clicking */
+  border-radius: 5px; /* Rounds the corners of the link backgrounds */
+  transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
 }
 
 .navigation .nav-link:hover {
-    background-color: #0d2f4b;
-    color: #ffffff;
+  background-color: #0d2f4b; /* Changes background color on hover */
+  color: #ffffff; /* Keeps text color white on hover */
 }
 
 /* HERO SECTION STYLES - HOME PAGE */
 .hero {
-    text-align: center;
-    padding: 4rem 2rem;
-    background: #e7eff6;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 2rem 0;
+  text-align: center; /* Centers text in the hero section */
+  padding: 4rem 2rem; /* Adds top and bottom padding */
+  background: #e7eff6; /* Light blue background for the hero section */
+  border-radius: 10px; /* Rounded corners for the hero section */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for a 3D effect */
+  margin: 2rem 0; /* Adds vertical space above and below the hero section */
 }
 
 .hero-title {
-    color: #123456;
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
+  color: #123456; /* Dark blue color for the title */
+  font-size: 2.5rem; /* Large font size for emphasis */
+  margin-bottom: 1rem; /* Space below the title */
 }
 
 .hero-description {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
-    font-family: 'Arial', sans-serif; /* Matching font with the desired style */
+  font-size: 1.2rem; /* Slightly larger font size for the description */
+  margin-bottom: 2rem; /* Space below the description */
+  font-family: "Arial", sans-serif; /* Arial font for a simple, clean look */
 }
 
 /* BUTTON STYLES - USED ON ALL PAGES */
 .btn {
-    background-color: #ff6b6b;
-    color: #fff;
-    padding: 1rem 2rem;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.3s;
+  background-color: #ff6b6b; /* Pinkish-red background for buttons */
+  color: #fff; /* White text on buttons for readability */
+  padding: 1rem 2rem; /* Comfortable padding around the button text */
+  border: none; /* No border for a modern, flat design */
+  border-radius: 25px; /* Rounded corners for a friendly look */
+  cursor: pointer; /* Hand cursor on hover for better user experience */
+  font-size: 1rem; /* Standard font size for button text */
+  transition: background-color 0.3s; /* Smooth background color transition on hover */
 }
 
 .btn.cta:hover {
-    background-color: #e55a5a;
+  background-color: #e55a5a; /* Slightly darker red on hover for an interactive feel */
 }
 
 /* FEATURE SECTION STYLES - HOME PAGE */
 .feature {
-    margin: 2rem 0;
-    text-align: center;
+  margin: 2rem 0; /* Vertical space around feature sections for separation */
+  text-align: center; /* Center alignment for text within features */
 }
 
 .feature-title {
-    font-size: 1.8rem;
-    color: #123456;
-    margin-bottom: 1rem;
+  font-size: 1.8rem; /* Larger font size for feature titles */
+  color: #123456; /* Deep blue color for emphasis */
+  margin-bottom: 1rem; /* Space below the title for layout balance */
 }
 
 .feature-description {
-    font-size: 1rem;
-    margin-bottom: 2rem;
+  font-size: 1rem; /* Standard font size for feature descriptions */
+  margin-bottom: 2rem; /* Space below the description for separation */
 }
 
 /* FOOTER STYLES - USED ON ALL PAGES */
 .footer {
-    background-color: #123456;
-    color: white;
-    text-align: center;
-    padding: 1rem 0;
-    position: relative;
-    bottom: 0;
-    width: 100%;
+  background-color: #123456; /* Deep blue background for footer */
+  color: white; /* White text for contrast against dark background */
+  text-align: center; /* Centered text for a neat look */
+  padding: 1rem 0; /* Padding above and below the content */
+  position: relative; /* Relative positioning for layout */
+  bottom: 0; /* Keeps footer at the bottom */
+  width: 100%; /* Full width of the footer */
 }
 
 .footer-text {
-    margin: 0;
+  margin: 0; /* No margin for the footer text to maintain layout */
 }
 
 /* LOGIN SECTION STYLES - LOGIN PAGE */
 .login-container {
-    margin: 2rem auto;
-    padding: 2rem;
-    max-width: 400px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 2rem auto; /* Center the container with margin */
+  padding: 2rem; /* Padding inside the container for spacing */
+  max-width: 400px; /* Maximum width to avoid overly wide forms */
+  background-color: #fff; /* White background for clarity */
+  border-radius: 10px; /* Rounded corners for a modern look */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for depth */
 }
 
 .login-title {
-    text-align: center;
-    color: #123456;
-    margin-bottom: 1rem;
+  text-align: center; /* Center the title for focus */
+  color: #123456; /* Deep blue color for the title */
+  margin-bottom: 1rem; /* Space below the title for separation */
 }
 
 .login-form {
-    display: flex;
-    flex-direction: column;
+  display: flex; /* Flex layout for form elements */
+  flex-direction: column; /* Stack elements vertically */
 }
 
 .login-form label {
-    margin-top: 1rem;
+  margin-top: 1rem; /* Space above each label for clarity */
 }
 
 .login-form input {
-    padding: 0.5rem;
-    margin-top: 0.5rem;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+  padding: 0.5rem; /* Comfortable padding inside inputs */
+  margin-top: 0.5rem; /* Space above each input for separation */
+  border-radius: 5px; /* Rounded corners for inputs */
+  border: 1px solid #ccc; /* Subtle border for inputs */
 }
 
 .register-prompt {
-    text-align: center;
-    margin-top: 1rem;
+  text-align: center; /* Center the registration prompt */
+  margin-top: 1rem; /* Space above the prompt for separation */
 }
 
 .register-prompt a {
-    color: #ff6b6b;
-    text-decoration: none;
+  color: #ff6b6b; /* Pinkish-red color for the link */
+  text-decoration: none; /* No underline to keep it clean */
 }
 
 .register-prompt a:hover {
-    text-decoration: underline;
+  text-decoration: underline; /* Underline on hover for interaction indication */
 }
 
 /* RESUME BUILDER SECTION STYLES - RESUME BUILDER PAGE */
+
+/* Styling for the resume preview display */
 .resume-display {
-    margin-top: 3rem;
-    padding: 2rem; /* Increased padding for a spacious feel */
-    background-color: #ffffff; /* Clean white background */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Adding subtle shadow for depth */
-    border-radius: 10px; /* More pronounced rounded corners */
+  margin-top: 3rem; /* Space above the resume display */
+  padding: 2rem; /* Padding inside the display for a spacious layout */
+  background-color: #ffffff; /* White background for clarity */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Shadow for depth and focus */
+  border-radius: 10px; /* Rounded corners for a modern appearance */
 }
 
-/* Styling for each fieldset in the resume form */
+/* Styling for each fieldset (group of fields) in the resume form */
 .resume-form fieldset {
-    margin-bottom: 3rem; /* Added space between each section */
-    padding: 1.5rem; /* Padding for layout */
-    border-radius: 8px; /* Rounded borders for modern look */
-    border: 1px solid #ddd; /* Border color for subtle definition */
+  margin-bottom: 3rem; /* Space between each group of fields */
+  padding: 1.5rem; /* Padding inside each fieldset */
+  border-radius: 8px; /* Rounded corners for the fieldset */
+  border: 1px solid #ddd; /* Light border for subtle separation */
 }
 
-/* Styling for the title of each section in the resume form */
+/* Styling for the title of each fieldset */
 .resume-form legend {
-    font-size: 1.4rem; /* Font size for section titles */
-    margin-bottom: 1.5rem; /* Space below titles */
-    color: #123456; /* Color to match with hero-title */
-    font-weight: bold; /* Bold font for emphasis */
+  font-size: 1.4rem; /* Larger font size for visibility */
+  margin-bottom: 1.5rem; /* Space below the title */
+  color: #123456; /* Dark blue color for a professional look */
+  font-weight: bold; /* Bold font for emphasis */
 }
 
-/* Styling for input and textarea fields */
+/* Styling for input fields and textareas */
 .resume-form input,
 .resume-form textarea {
-    width: 100%;
-    margin-top: 0.5rem;
-    margin-bottom: 1rem; /* Space below each field */
-    padding: 0.75rem; /* Padding for text visibility */
-    border: 1px solid #ccc; /* Border color for definition */
-    border-radius: 5px; /* Rounded borders for inputs and textareas */
-    font-family: 'Arial', sans-serif; /* Font family for clean readability */
-    font-size: 1rem; /* Font size for legibility */
+  width: 100%; /* Full width to utilize space */
+  margin-top: 0.5rem; /* Space above each field */
+  margin-bottom: 1rem; /* Space below each field */
+  padding: 0.75rem; /* Padding for comfortable typing */
+  border: 1px solid #ccc; /* Light grey border for definition */
+  border-radius: 5px; /* Rounded edges for a modern look */
+  font-family: "Arial", sans-serif; /* Clean and readable font */
+  font-size: 1rem; /* Standard font size for ease of reading */
 }
 
-/* Styling for buttons in the resume form */
+/* Styling for buttons within the resume form */
 .resume-form button {
-    margin-top: 1rem; /* Space above the button */
-    background-color: #ff6b6b; /* Background color for primary actions */
-    color: white; /* Text color for contrast */
-    border: none; /* No border for buttons */
-    padding: 0.75rem 1.5rem; /* Padding for larger clickable area */
-    border-radius: 5px; /* Rounded borders for buttons */
-    cursor: pointer; /* Cursor pointer for button interactivity */
-    font-size: 1rem; /* Font size for consistency with input fields */
+  margin-top: 1rem; /* Space above the button */
+  background-color: #ff6b6b; /* Pinkish-red color for primary actions */
+  color: white; /* White text for contrast */
+  border: none; /* No border for a clean look */
+  padding: 0.75rem 1.5rem; /* Comfortable padding for easier clicking */
+  border-radius: 5px; /* Rounded edges for aesthetic consistency */
+  cursor: pointer; /* Pointer cursor for interactivity */
+  font-size: 1rem; /* Consistent font size with input fields */
 }
 
-/* Specific styling for 'Add Education' button */
-.resume-form .add-button {
-    /* Inherits styles from .resume-form button */
-    /* Additional or overriding styles can be added here if necessary */
-}
-
-/* Specific styling for 'Remove' button for secondary actions */
+/* Specific styling for the 'Remove' button */
 .resume-form .remove-button {
-    background-color: #ffcccc; /* Lighter red for secondary actions like removal */
-    color: #333; /* Color for text to maintain readability */
-    padding: 0.5rem 1rem; /* Smaller padding for a less prominent button */
-    margin-top: 1rem; /* Space above the 'Remove' button */
-    margin-bottom: 2rem; /* Space below the 'Remove' button */
-    font-size: 0.85rem; /* Smaller font size for secondary action buttons */
+  background-color: #ffcccc; /* Light red for less emphasis */
+  color: #333; /* Dark text for readability */
+  padding: 0.5rem 1rem; /* Smaller padding for a less dominant appearance */
+  margin-top: 1rem; /* Space above the button */
+  margin-bottom: 2rem; /* Space below the button */
+  font-size: 0.85rem; /* Smaller font size for a subtler button */
 }
 
-/* Hover effect for 'Remove' button */
+/* Hover effect for the 'Remove' button */
 .resume-form .remove-button:hover {
-    background-color: #ffaaaa; /* Darker shade on hover for interaction feedback */
+  background-color: #ffaaaa; /* Slightly darker red on hover for interaction feedback */
 }
 
-/* Styling for template selection buttons in the resume form */
+/* Styles for month input fields */
+.resume-form input[type="month"] {
+  margin-top: 0.5rem; /* Space above the month input */
+  padding: 0.75rem; /* Padding for easier interaction */
+  border: 1px solid #ccc; /* Border for clear definition */
+  border-radius: 5px; /* Rounded edges for aesthetic appeal */
+}
+
+/* Styles for labels in the resume form */
+.resume-form label {
+  margin-left: 1rem; /* Left margin for alignment with input fields */
+}
+
+/* Styles for labels associated with date input fields */
+.resume-form .end-date-label,
+.resume-form .present-label {
+  display: block; /* Display as block for better layout control */
+  margin-top: 1rem; /* Space above the label */
+  font-weight: normal; /* Standard font weight for readability */
+}
+
+/* Style for the 'I currently work here' checkbox label */
+.resume-form .present-label {
+  margin-top: 0.5rem; /* Slightly less space above the label */
+  font-style: italic; /* Italicized for emphasis */
+}
+
+/* Style adjustments for checkboxes */
+.resume-form input[type="checkbox"] {
+  margin-left: 0.5rem; /* Space to the left for separation from text */
+  vertical-align: middle; /* Aligns checkbox vertically with the text */
+}
+
+/* Styling for template selection buttons */
 .template-selection .btn {
-    margin: 1rem 0.5rem; /* Horizontal space around each template button */
-    padding: 1rem 1.5rem; /* Padding for a substantial feel */
-    font-size: 1.1rem; /* Font size for readability */
+  margin: 1rem 0.5rem; /* Horizontal space around each button */
+  padding: 1rem 1.5rem; /* Substantial padding for a larger button */
+  font-size: 1.1rem; /* Slightly larger font size for emphasis */
 }
 
-/* RESPONSIVE STYLES - USED ON ALL PAGES */
+/* RESPONSIVE STYLES - ADJUSTMENTS FOR SMALLER SCREENS */
+
+/* Media query for devices with a screen width of 768px or less */
 @media (max-width: 768px) {
-    .resume-display {
-        padding: 1.5rem; /* Adjust padding for smaller screens */
-    }
+  .resume-display {
+    padding: 1.5rem; /* Reduces padding for smaller screens to save space */
+  }
 
-    .template-selection {
-        margin-top: 4rem; /* Adjust top margin for smaller screens */
-        grid-template-columns: 1fr; /* Adjust template grid for single column layout */
-    }
+  .template-selection {
+    margin-top: 4rem; /* Increases top margin for clearer separation */
+    grid-template-columns: 1fr; /* Adjusts to a single column layout for better readability */
+  }
 }
 
+/* TEMPLATE SELECTION STYLES - FOR RESUME BUILDER PAGE */
 
-/* MODERN TEMPLATE STYLES */
+/* Container for the template selection buttons */
+.template-selection-container {
+  text-align: center; /* Centers the template buttons */
+  margin-bottom: 20px; /* Adds space below the container */
+}
 
+/* Container for the submit button */
+.submit-button-container {
+  text-align: center; /* Centers the submit button */
+  margin-top: 20px; /* Adds space above the container */
+}
+
+/* Styles for template selection buttons */
+.btn.template-btn {
+  margin: 10px; /* Adds space around each button */
+  /* Additional specific styles can be added if needed */
+}
+
+/* MODERN TEMPLATE STYLES - ENHANCED VISUALS FOR MODERN TEMPLATE */
+
+/* Basic styling for the modern template container */
 .modern {
-    font-family: 'Roboto', sans-serif; /* Using Roboto for a modern and clean look */
-    color: #333; /* Standard text color for good readability */
-    background-color: #fff; /* White background for a clean design */
-    max-width: 800px; /* Limiting the width for better layout control */
-    margin: 20px auto; /* Centering the template on the page with some vertical spacing */
-    padding: 20px; /* Adding padding for some space inside the elements */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for a subtle 3D effect */
+  font-family: "Roboto", sans-serif; /* Uses the Roboto font for a modern look */
+  color: #333; /* Sets the text color */
+  background-color: #fafafa; /* Light grey background for a clean look */
+  max-width: 800px; /* Restricts the maximum width of the container */
+  margin: 40px auto; /* Centers the container with vertical margins */
+  padding: 25px; /* Adds padding inside the container */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Adds a shadow for depth */
+  border-radius: 10px; /* Rounds the corners of the container */
 }
 
-/* Styling for the header section of the Modern Template */
+/* Styling for the header section of the modern template */
 .modern-header {
-    background: linear-gradient(45deg, #6D5ACF 0%, #1A74BA 100%); /* Gradient background for visual appeal */
-    color: white; /* White text to contrast against the background */
-    padding: 30px 20px; /* Generous padding for spacing */
-    text-align: left; /* Aligning the header text to the left */
+  background: linear-gradient(
+    135deg,
+    #0093e9 0%,
+    #80d0c7 100%
+  ); /* Gradient background for visual appeal */
+  color: white; /* White text for contrast */
+  padding: 50px; /* Adds padding for spacing */
+  text-align: center; /* Centers the text */
+  border-top-left-radius: 10px; /* Rounds the top-left corner */
+  border-top-right-radius: 10px; /* Rounds the top-right corner */
 }
 
+/* Styling for the main heading (H1) in the modern template header */
 .modern-header h1 {
-    font-size: 2.8rem; /* Larger font size for the main header */
-    font-weight: 700; /* Bold font weight for emphasis */
-    margin: 0; /* Removing the default margin */
+  font-size: 3.2rem; /* Large font size for the main heading */
+  font-weight: 700; /* Bold weight for emphasis */
+  margin-bottom: 0.5rem; /* Space below the heading */
 }
 
-/* General section styling for the Modern Template */
-.modern .section {
-    background-color: #fff; /* Keeping sections white for a clean look */
-    margin: 20px 0; /* Spacing out each section */
-    padding: 20px; /* Padding inside each section */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    border-radius: 8px; /* Rounded corners for a modern feel */
+/* Styling for individual sections within the modern template */
+.modern-section {
+  background-color: #ffffff; /* White background for each section */
+  margin: 30px 0; /* Vertical margin for spacing between sections */
+  padding: 30px; /* Padding inside each section */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Shadow for a subtle 3D effect */
+  border-radius: 5px; /* Rounds the corners of each section */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
 }
 
+/* Hover effect for sections within the modern template */
+.modern-section:hover {
+  transform: translateY(-5px); /* Slightly raises the section */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Increases shadow for a floating effect */
+}
+
+/* Styling for icons in the contact info section */
 .modern .contact-info i {
-    display: inline-block; /* Icons are inline with text */
-    margin-right: 10px; /* Space between icon and text */
-    color: #6D5ACF; /* Using a color accent for icons */
+  color: #0093e9; /* Sets the icon color to match the theme */
+  margin-right: 15px; /* Adds space to the right of the icon */
 }
 
-/* MINIMALISTIC TEMPLATE STYLES */
+/* Styling for the experience and education sections */
+.modern-experience,
+.modern-education {
+  margin: 20px 0; /* Vertical margin for spacing */
+  padding: 15px; /* Padding inside each section */
+  background-color: #f8f8f8; /* Light grey background for distinction */
+  border-radius: 8px; /* Rounded corners for a modern look */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
 
+/* Styling for headings within experience and education sections */
+.modern-experience h3,
+.modern-education h3 {
+  font-size: 1.8rem; /* Font size for section headings */
+  margin-bottom: 15px; /* Space below the heading */
+  color: #0093e9; /* Blue color for visual emphasis */
+}
+
+/* Styling for unordered lists in experience and education sections */
+.modern-experience ul,
+.modern-education ul {
+  list-style: none; /* No bullet points for a clean look */
+  padding: 0; /* No padding for alignment */
+}
+
+/* Styling for list items in experience and education sections */
+.modern-experience li,
+.modern-education li {
+  margin-bottom: 10px; /* Space between list items */
+  font-size: 1.1rem; /* Font size for readability */
+}
+
+/* MINIMALISTIC TEMPLATE STYLES - SIMPLIFIED AND CLEAN DESIGN */
+
+/* Basic styling for the minimalistic template container */
 .minimalistic {
-    font-family: 'Helvetica Neue', 'Segoe UI', Arial, sans-serif; /* Clean and elegant font choice */
-    color: #333; /* Dark grey text for readability */
-    background-color: #fff; /* White background for minimalistic look */
-    max-width: 800px; /* Consistent width with the Modern template */
-    margin: 20px auto; /* Centered on page with vertical spacing */
-    padding: 25px; /* Slightly more padding than Modern template for airy feel */
+  font-family: "Helvetica Neue", Arial, sans-serif; /* Clean and professional font */
+  color: #4a4a4a; /* Grey text color for a subtle look */
+  background-color: #fff; /* White background for contrast */
+  max-width: 800px; /* Maximum width to maintain readability */
+  margin: 40px auto; /* Centers the container with vertical spacing */
+  padding: 35px; /* Padding inside the container for layout */
+  border: 2px solid #e0e0e0; /* Border for definition */
+  border-radius: 8px; /* Rounded corners for a soft appearance */
 }
 
-/* Header styling for the Minimalistic Template */
+/* Styling for the header section of the minimalistic template */
 .minimalistic-header {
-    text-align: center; /* Center-aligning header content */
-    padding: 20px 0; /* Padding around the header */
+  text-align: center; /* Centers the header text */
+  padding: 35px 0; /* Padding above and below the header text */
+  border-bottom: 3px solid #e0e0e0; /* Border to separate the header from content */
 }
 
+/* Styling for the main heading (H1) in the minimalistic template header */
 .minimalistic-header h1 {
-    font-size: 2.5rem; /* Large font size for header */
-    color: black; /* Using black for a strong, clear header */
-    margin-bottom: 0.25em; /* Less space below the header for compact look */
+  font-size: 3rem; /* Large font size for the main heading */
+  font-weight: 300; /* Lighter font weight for a clean look */
+  color: #333; /* Dark grey color for contrast */
 }
 
-/* Styling for each section in the Minimalistic Template */
+/* General styling for sections in the minimalistic template */
 .minimalistic-section {
-    margin-bottom: 25px; /* Spacing between sections */
-    padding-bottom: 10px; /* Padding at the bottom of each section */
+  margin-bottom: 35px; /* Space below each section */
+  padding: 25px; /* Padding inside each section */
 }
 
+/* Styling for section titles within the minimalistic template */
 .minimalistic-section-title {
-    font-size: 1.25rem; /* Moderately large font for section titles */
-    margin-bottom: 10px; /* Space below the title */
-    padding-bottom: 5px; /* Padding below the title for visual separation */
-    border-bottom: 1px solid #ddd; /* Light grey line below the title for subtle division */
+  font-size: 1.6rem; /* Font size for section titles */
+  color: #333; /* Dark grey color for readability */
+  margin-bottom: 20px; /* Space below the title */
+  padding-bottom: 15px; /* Padding below the title */
+  border-bottom: 1px solid #ddd; /* Border for visual separation from content */
 }
 
+/* LIST ITEMS STYLES IN MINIMALISTIC TEMPLATE */
+
+/* Styling for list items in skills, experience, and education lists */
 .minimalistic .skills-list li,
 .minimalistic .experience-list li,
 .minimalistic .education-list li {
-    margin-bottom: 8px; /* Space between list items */
-    font-size: 0.9rem; /* Slightly smaller font size for list items */
+  margin-bottom: 12px; /* Adds space between list items */
+  font-size: 1.1rem; /* Sets font size for readability */
+  line-height: 1.6; /* Adjusts line height for easier reading */
+}
+
+/* EXPERIENCE AND EDUCATION SECTIONS STYLES IN MINIMALISTIC TEMPLATE */
+
+/* Styling for experience and education sections */
+.minimalistic-experience,
+.minimalistic-education {
+  margin: 20px 0; /* Adds vertical spacing around sections */
+  padding: 15px; /* Padding inside sections for content separation */
+  border-top: 2px solid #e0e0e0; /* Top border for visual division */
+}
+
+/* Styling for headings in experience and education sections */
+.minimalistic-experience h3,
+.minimalistic-education h3 {
+  font-size: 1.8rem; /* Larger font size for section titles */
+  margin-bottom: 15px; /* Space below titles for separation */
+  color: #4a4a4a; /* Dark grey color for text */
+}
+
+/* Unordered lists in experience and education sections */
+.minimalistic-experience ul,
+.minimalistic-education ul {
+  list-style: none; /* Removes bullet points for cleaner look */
+  padding: 0; /* Removes default padding */
+}
+
+/* List items in experience and education sections */
+.minimalistic-experience li,
+.minimalistic-education li {
+  margin-bottom: 10px; /* Space between list items */
+  font-size: 1.1rem; /* Consistent font size with other list items */
+}
+
+/* EXPERIENCE BLOCK STYLES IN MINIMALISTIC TEMPLATE */
+
+/* Styling for each experience block */
+.experience-block {
+  background-color: #f2f2f2; /* Light grey background for distinction */
+  padding: 10px; /* Padding inside the block for content separation */
+  margin-bottom: 10px; /* Space below the block */
+  border-radius: 5px; /* Rounded corners for softer appearance */
+}
+
+/* Input fields and textareas within each experience block */
+.experience-block input[type="text"],
+.experience-block input[type="month"],
+.experience-block textarea {
+  width: 100%; /* Full width for better layout */
+  padding: 8px; /* Padding for easier text entry */
+  margin-top: 5px; /* Space above each input field */
+  margin-bottom: 10px; /* Space below each input field */
+  border-radius: 4px; /* Slightly rounded corners for inputs */
+  border: 1px solid #ddd; /* Light grey border for visual clarity */
+}
+
+/* LABEL AND CHECKBOX STYLES WITHIN EXPERIENCE BLOCK */
+
+/* Label including 'I currently work here' checkbox */
+.experience-block .present-label {
+  display: flex; /* Flexbox for better alignment */
+  align-items: center; /* Centers items vertically within the label */
+}
+
+/* Clickable area adjustment for checkbox and label */
+.resume-form .present-label input[type="checkbox"] {
+  margin-right: 0.5rem; /* Right margin for space between checkbox and text */
+}
+
+.resume-form .present-label {
+  display: inline-flex; /* Inline flex for label and checkbox alignment */
+  align-items: center; /* Vertical center alignment of elements */
+  cursor: pointer; /* Pointer cursor for interactivity indication */
+}
+
+/* Padding adjustment for intuitive clickable area */
+.resume-form .present-label {
+  padding: 0; /* No padding to keep clickable area compact */
+}
+
+/* REMOVE BUTTON STYLES WITHIN EXPERIENCE BLOCK */
+
+/* Styling for the remove button */
+.experience-block button {
+  background-color: #ff4d4d; /* Bright red for attention-grabbing */
+  color: white; /* White text for high contrast */
+  padding: 5px 10px; /* Padding for a larger clickable area */
+  border: none; /* No border for a cleaner look */
+  border-radius: 4px; /* Rounded corners for a softer appearance */
+  cursor: pointer; /* Pointer cursor for clickability */
+}
+
+/* Hover effect for the remove button */
+.experience-block button:hover {
+  background-color: #ff6666; /* Lighter red on hover for interaction feedback */
 }

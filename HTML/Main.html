@@ -2,211 +2,309 @@
 <html lang="en">
 
 <head>
-    <!-- GENERAL: Setting up character encoding, viewport for responsive design, and linking the CSS stylesheet -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resume Builder</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"> <!-- Google Fonts: Roboto -->
-    <link rel="stylesheet" href="../CSS/style.css">
-    
-
+  <!-- GENERAL: Setting up character encoding, viewport for responsive design, and linking the CSS stylesheet -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resume Builder</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <!-- Google Fonts: Roboto -->
+  <link rel="stylesheet" href="../CSS/style.css" />
 </head>
 
 <body>
-    <!-- GENERAL: Main container for all page content -->
-    <div class="container">
-        <!-- HEADER: Contains the logo and navigation menu -->
-        <header class="header">
-            <!-- Logo section -->
-            <div class="logo-container">
-                <img src="../Images/logo.png" alt="Resume Builder Logo" class="logo">
+  <!-- GENERAL: Main container for all page content -->
+  <div class="container">
+    <!-- HEADER: Contains the logo and navigation menu -->
+    <header class="header">
+      <!-- Logo section -->
+      <div class="logo-container">
+        <img src="../Images/logo.png" alt="Resume Builder Logo" class="logo" />
+      </div>
+      <!-- Navigation bar with links to different pages -->
+      <nav class="navigation">
+        <ul class="nav-list">
+          <!-- HOME PAGE LINK: Navigates to Home section -->
+          <li class="nav-item">
+            <a href="#" class="nav-link" onclick="navigateTo('home'); return false;">Home</a>
+          </li>
+          <!-- BUILD RESUME PAGE LINK: Navigates to Build Resume section -->
+          <li class="nav-item">
+            <a href="#" class="nav-link" onclick="navigateTo('buildResume'); return false;">Build Resume</a>
+          </li>
+          <!-- LOGIN PAGE LINK: Navigates to Log In section -->
+          <li class="nav-item">
+            <a href="#" class="nav-link" onclick="navigateTo('logIn'); return false;">Log In</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- HOME PAGE SECTION: Visible when users first visit the site -->
+    <main id="home" class="page-section">
+      <!-- HERO SECTION: Contains welcome message and a call-to-action button -->
+      <section class="hero">
+        <h1 class="hero-title">Build Your Professional Resume</h1>
+        <p class="hero-description">
+          Join thousands of others who have created their resumes easily with
+          our tool.
+        </p>
+        <!-- Button to navigate to the Build Resume section -->
+        <button id="get-started" class="btn cta" onclick="navigateTo('buildResume'); return false;">
+          Get Started
+        </button>
+      </section>
+      <!-- FEATURES: Highlighting the features or additional information -->
+      <section id="create" class="feature">
+        <h2 class="feature-title">Build Resume</h2>
+        <p class="feature-description">
+          Start building your professional resume quickly and easily with our
+          step-by-step guide.
+        </p>
+      </section>
+      <section id="templates" class="feature">
+        <h2 class="feature-title">Browse Our Templates</h2>
+        <p class="feature-description">
+          Choose from a variety of customizable, professional templates.
+        </p>
+      </section>
+    </main>
+
+    <!-- BUILD RESUME SECTION: Contains form for building the resume, hidden by default -->
+    <main id="buildResume" class="page-section" style="display: none">
+      <section class="hero">
+        <h1 class="hero-title">Build Your Professional Resume</h1>
+        <p class="hero-description">
+          Customize and download your professional resume in minutes.
+        </p>
+      </section>
+      <!-- RESUME BUILDER FORM: Form for users to input their resume details -->
+      <section class="resume-builder">
+        <form class="resume-form" id="resume-form">
+          <!-- PERSONAL INFORMATION: Section for user's personal details -->
+          <fieldset>
+            <legend>Personal Information</legend>
+
+            <label for="full-name">Full Name:</label>
+            <input type="text" id="full-name" name="full-name" required
+              onchange="updateCVPreview(getCurrentTemplateName())" />
+
+            <label for="job-title">Job Title:</label>
+            <input type="text" id="job-title" name="job-title" required
+              onchange="updateCVPreview(getCurrentTemplateName())" />
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required onchange="updateCVPreview(getCurrentTemplateName())" />
+
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" name="phone" required onchange="updateCVPreview(getCurrentTemplateName())" />
+
+            <label for="linkedin">LinkedIn:</label>
+            <input type="url" id="linkedin" name="linkedin" placeholder="LinkedIn Profile URL"
+              onchange="updateCVPreview(getCurrentTemplateName())" />
+
+
+
+            <label for="personal-summary">Personal Summary:</label>
+            <textarea id="personal-summary" name="personal-summary" required
+              onchange="updateCVPreview(getCurrentTemplateName())"></textarea>
+          </fieldset>
+
+          <!-- CV PHOTO: Section for uploading a CV photo -->
+          <fieldset>
+            <legend>CV Photo</legend>
+            <input type="file" id="cv-photo" name="cv-photo" accept="image/*" />
+            <button type="button" id="upload-photo" class="btn">
+              Upload Photo
+            </button>
+          </fieldset>
+          <!-- WORK EXPERIENCE: Section for adding work experience details -->
+          <fieldset>
+            <legend>Work Experience</legend>
+            <div id="work-experience-section">
+              <!-- Placeholder for dynamically adding work experience fields -->
             </div>
-            <!-- Navigation bar with links to different pages -->
-            <nav class="navigation">
-                <ul class="nav-list">
-                    <!-- HOME PAGE LINK: Navigates to Home section -->
-                    <li class="nav-item"><a href="#" class="nav-link"
-                            onclick="navigateTo('home'); return false;">Home</a></li>
-                    <!-- BUILD RESUME PAGE LINK: Navigates to Build Resume section -->
-                    <li class="nav-item"><a href="#" class="nav-link"
-                            onclick="navigateTo('buildResume'); return false;">Build Resume</a></li>
-                    <!-- LOGIN PAGE LINK: Navigates to Log In section -->
-                    <li class="nav-item"><a href="#" class="nav-link" onclick="navigateTo('logIn'); return false;">Log
-                            In</a></li>
-                </ul>
-            </nav>
-        </header>
+            <button type="button" id="add-experience" class="btn">
+              Add Experience
+            </button>
+          </fieldset>
+          <!-- EDUCATION: Section for adding educational details -->
+          <fieldset>
+            <legend>Education</legend>
+            <div id="education-section">
+              <!-- Placeholder for dynamically adding education fields -->
+            </div>
+            <button type="button" id="add-education" class="btn">
+              Add Education
+            </button>
+          </fieldset>
+          <!-- TEMPLATE SELECTION: Options to choose a resume template -->
+          <div class="template-selection-container">
+            <button type="button" class="btn template-btn" onclick="selectTemplate('modern')">Modern Template</button>
+            <button type="button" class="btn template-btn" onclick="selectTemplate('minimalistic')">Minimalistic
+              Template</button>
+          </div>
 
-        <!-- HOME PAGE SECTION: Visible when users first visit the site -->
-        <main id="home" class="page-section">
-            <!-- HERO SECTION: Contains welcome message and a call-to-action button -->
-            <section class="hero">
-                <h1 class="hero-title">Build Your Professional Resume</h1>
-                <p class="hero-description">Join thousands of others who have created their resumes easily with our
-                    tool.</p>
-                <!-- Button to navigate to the Build Resume section -->
-                <button id="get-started" class="btn cta" onclick="navigateTo('buildResume'); return false;">Get
-                    Started</button>
-            </section>
-            <!-- FEATURES: Highlighting the features or additional information -->
-            <section id="create" class="feature">
-                <h2 class="feature-title">Build Resume</h2>
-                <p class="feature-description">Start building your professional resume quickly and easily with our
-                    step-by-step guide.</p>
-            </section>
-            <section id="templates" class="feature">
-                <h2 class="feature-title">Browse Our Templates</h2>
-                <p class="feature-description">Choose from a variety of customizable, professional templates.</p>
-            </section>
-        </main>
+          <!-- Modern Template Preview -->
+          <!-- Photo is positioned at the top left of the Modern Template -->
+          <div id="modern-template-preview" class="resume-template modern" style="display: none">
+            <img id="cv-photo-modern" src="path-to-default-photo.jpg" alt="Profile Photo" style="float: left;" />
+            <div class="modern-header">
+              <h1>Karla Santos</h1>
+              <h2>Senior Front End Developer</h2>
+            </div>
+            <div class="modern-contact-info">
+              <ul>
+                <li>Email: karlasantos@example.com</li>
+                <li>Phone: 0769828333</li>
+                <li>LinkedIn: <a href="https://www.linkedin.com/in/" target="_blank">karla-santos</a></li>
+              </ul>
+            </div>
+            <div class="modern-career-objective">
+              <p>
+                As a front-end developer with a passion for beautiful, functional design...
+              </p>
+            </div>
+            <!-- Work Experience Section -->
+            <div class="modern-experience">
+              <h3>Experience</h3>
+              <ul id="modern-experience-list">
+                <!-- Dynamically generated experiences will be inserted here -->
+              </ul>
+            </div>
+            <!-- Education Section -->
+            <div class="modern-education">
+              <h3>Education</h3>
+              <ul id="modern-education-list">
+                <!-- Dynamically generated education entries will be inserted here -->
+              </ul>
+            </div>
+          </div>
 
-        <!-- BUILD RESUME SECTION: Contains form for building the resume, hidden by default -->
-        <main id="buildResume" class="page-section" style="display: none;">
-            <section class="hero">
-                <h1 class="hero-title">Build Your Professional Resume</h1>
-                <p class="hero-description">Customize and download your professional resume in minutes.</p>
-            </section>
-            <!-- RESUME BUILDER FORM: Form for users to input their resume details -->
-            <section class="resume-builder">
-                <form class="resume-form" id="resume-form">
-                    <!-- PERSONAL INFORMATION: Section for user's personal details -->
-                    <fieldset>
-                        <legend>Personal Information</legend>
-                        <label for="full-name">Full Name:</label>
-                        <input type="text" id="full-name" name="full-name" required>
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" required>
-                        <label for="phone">Phone:</label>
-                        <input type="tel" id="phone" name="phone" required>
-                        <label for="linkedin">LinkedIn:</label>
-                        <input type="url" id="linkedin" name="linkedin" placeholder="LinkedIn Profile URL">
-                    </fieldset>
-                    <!-- CV PHOTO: Section for uploading a CV photo -->
-                    <fieldset>
-                        <legend>CV Photo</legend>   
-                        <input type="file" id="cv-photo" name="cv-photo" accept="image/*">
-                        <button type="button" id="upload-photo" class="btn">Upload Photo</button>
-                    </fieldset>
-                    <!-- WORK EXPERIENCE: Section for adding work experience details -->
-                    <fieldset>
-                        <legend>Work Experience</legend>
-                        <div id="work-experience-section">
-                            <!-- Placeholder for dynamically adding work experience fields -->
-                        </div>
-                        <button type="button" id="add-experience" class="btn">Add Experience</button>
-                    </fieldset>
-                    <!-- EDUCATION: Section for adding educational details -->
-                    <fieldset>
-                        <legend>Education</legend>
-                        <div id="education-section">
-                            <!-- Placeholder for dynamically adding education fields -->
-                        </div>
-                        <button type="button" id="add-education" class="btn">Add Education</button>
-                    </fieldset>
-                    <!-- TEMPLATE SELECTION: Options to choose a resume template -->
-                    <div class="template-selection">
-                        <button type="button" class="btn" onclick="selectTemplate('modern')">Modern Template</button>
-                        <button type="button" class="btn" onclick="selectTemplate('minimalistic')">Minimalistic Template</button>
-                    </div>
-                    
-                    <!-- Modern Template Preview -->
-                    <div id="modern-template-preview" class="resume-template modern" style="display: none;">
-                        <div class="modern-header">
-                            <h1>Karla Santos</h1>
-                            <h2>Senior Front End Developer</h2>
-                        </div>
-                        <div class="modern-contact-info">
-                            <ul>
-                                <li>Email: karlasantos@example.com</li>
-                                <li>Phone: 0769828333</li>
-                                <li>LinkedIn: <a href="https://www.linkedin.com/in/" target="_blank">karla-santos</a></li>
-                            </ul>
-                        </div>
-                        <div class="modern-photo-cv">
-                            <!-- Imaginary path to the CV photo; will replace with actual path -->
-                            <img src="path-to-cv-photo.jpg" alt="Karla Santos">
-                        </div>
-                        <div class="modern-career-objective">
-                            <p>As a front-end developer with a passion for beautiful, functional design, I leverage modern frameworks and a
-                                user-centered approach to deliver exceptional client experiences.</p>
-                        </div>
-                        <!-- Work Experience and Education sections will follow -->
-                    </div>
-                    
-                    <!-- Minimalistic Template Preview -->
-                    <div id="minimalistic-template-preview" class="resume-template minimalistic" style="display: none;">
-                        <div class="minimalistic-header">
-                            <h1>Karla Santos</h1>
-                            <h2>Director of Product Management</h2>
-                        </div>
-                        <div class="minimalistic-contact-info">
-                            <ul>
-                                <li>Email: karlasantos@example.com</li>
-                                <li>Phone: 0769828333</li>
-                                <li>LinkedIn: <a href="https://www.linkedin.com/in/" target="_blank">rahulmalik</a></li>
-                            </ul>
-                        </div>
-                        <div class="minimalistic-photo-cv">
-                            <!-- Imaginary path to the CV photo; replace with actual path -->
-                            <img src="path-to-cv-photo.jpg" alt="Karla Santos"
-                                style="width: 100px; height: 100px; object-fit: cover; border-radius: 50%;">
-                        </div>
-                        <!-- Work Experience and Education sections will follow -->
-                    </div>
+          <!-- Minimalistic Template Preview -->
+          <div id="minimalistic-template-preview" class="resume-template minimalistic" style="display: none">
+            <div class="minimalistic-header">
+              <img id="cv-photo-minimalistic" src="path-to-default-photo.jpg" alt="Profile Photo" />
+              <h1>Karla Santos</h1>
+              <h2>Director of Product Management</h2>
+            </div>
+            <div class="minimalistic-contact-info">
+              <ul>
+                <li>Email: karlasantos@example.com</li>
+                <li>Phone: 0769828333</li>
+                <li>LinkedIn: <a href="https://www.linkedin.com/in/" target="_blank">rahulmalik</a></li>
+              </ul>
+              <div class="minimalistic-summary">
+                <p id="minimalistic-personal-summary">
+                  Your personal summary will appear here.
+                </p>
+              </div>
+            </div>
+            <!-- Work Experience Section -->
+            <div class="minimalistic-experience">
+              <h3>Experience</h3>
+              <ul id="minimalistic-experience-list">
+                <!-- Dynamically generated experiences will be inserted here -->
+              </ul>
+            </div>
+            <!-- Education Section -->
+            <div class="minimalistic-education">
+              <h3>Education</h3>
+              <ul id="minimalistic-education-list">
+                <!-- Dynamically generated education entries will be inserted here -->
+              </ul>
+            </div>
+          </div>
 
-                    
-                    <!-- SUBMIT BUTTON: To submit the form data -->
-                    <button type="submit" class="btn cta">Submit Resume</button>
-                </form>
-            </section>
-        </main>
+          <div id="cv-preview" class="cv-preview">
+            <!-- Dynamically generated CV will be displayed here -->
+          </div>
 
-        <!-- LOGIN SECTION: Contains form for logging in, hidden by default -->
-        <main id="logIn" class="page-section" style="display: none;">
-            <section class="login-container">
-                <h1 class="login-title">Log In to Your Account</h1>
-                <form class="login-form">
-                    <label for="login-email">Email:</label>
-                    <input type="email" id="login-email" name="login-email" required>
-                    <label for="login-password">Password:</label>
-                    <input type="password" id="login-password" name="login-password" required>
-                    <button type="submit" class="btn">Log In</button>
-                    <!-- REGISTRATION PROMPT: Link to navigate to the registration section -->
-                    <p class="register-prompt">Don't have an account? <a href="#" class="nav-link"
-                            onclick="navigateTo('register'); return false;">Register here</a></p>
-                </form>
-            </section>
-        </main>
+          <div class="submit-button-container">
+            <button type="submit" class="btn cta">
+              Download Resume As PDF
+            </button>
+          </div>
+        </form>
+      </section>
+    </main>
 
-        <!-- FOOTER: Footer of the website with copyright notice -->
-        <footer class="footer">
-            <p>© 2024 CareerCanvas COMP1004 Project. All rights reserved.</p>
-        </footer>
-    </div>
+    <!-- LOGIN SECTION: Contains form for logging in, hidden by default -->
+    <main id="logIn" class="page-section" style="display: none">
+      <section class="login-container">
+        <h1 class="login-title">Log In to Your Account</h1>
+        <form class="login-form">
+          <label for="login-email">Email:</label>
+          <input type="email" id="login-email" name="login-email" required />
+          <label for="login-password">Password:</label>
+          <input type="password" id="login-password" name="login-password" required />
+          <button type="submit" class="btn">Log In</button>
+          <!-- REGISTRATION PROMPT: Link to navigate to the registration section -->
+          <p class="register-prompt">
+            Don't have an account?
+            <a href="#" class="nav-link" onclick="navigateTo('register'); return false;">Register here</a>
+          </p>
+        </form>
+      </section>
+    </main>
 
-    <!-- JavaScript for general functionality -->
-    <script src="../javascript.js"></script>
-    <!-- Firebase Integration: Importing Firebase functions and initializing Firebase with configuration -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js";
-        import { getFirestore } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js";
-        import { getAuth } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-auth.js";
-        import { getStorage } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-storage.js";
+    <!-- FOOTER: Footer of the website with copyright notice -->
+    <footer class="footer">
+      <p>© 2024 CareerCanvas COMP1004 Project. All rights reserved.</p>
+    </footer>
+  </div>
+  <!-- Firebase SDK -->
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyCOLRzioTQibxjYYWvDEUC_T1m-ZsUEYWs",
-            authDomain: "careercanvas---comp1004.firebaseapp.com",
-            projectId: "careercanvas---comp1004",
-            storageBucket: "careercanvas---comp1004.appspot.com",
-            messagingSenderId: "919468929826",
-            appId: "1:919468929826:web:412ee0fa37278c5d2cab7b"
-        };
 
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        const auth = getAuth(app);
-        const storage = getStorage(app);
-    </script>
+
+  <script type="module">
+    // Firebase SDK inclusion and initialization
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js";
+    import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-storage.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCOLRzioTQibxjYYWvDEUC_T1m-ZsUEYWs",
+      authDomain: "careercanvas---comp1004.firebaseapp.com",
+      projectId: "careercanvas---comp1004",
+      storageBucket: "careercanvas---comp1004.appspot.com",
+      messagingSenderId: "919468929826",
+      appId: "1:919468929826:web:412ee0fa37278c5d2cab7b",
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const storage = getStorage(app);
+
+    // Functionality related to Firebase Storage
+    function setupFirebaseStorage() {
+      const uploadPhotoButton = document.getElementById("upload-photo");
+      const cvPhotoInput = document.getElementById("cv-photo");
+
+      uploadPhotoButton.addEventListener("click", async () => {
+        if (cvPhotoInput.files.length > 0) {
+          const file = cvPhotoInput.files[0];
+          const storageRef = ref(storage, `photo_upload/${file.name}`);
+
+          try {
+            const uploadTaskSnapshot = await uploadBytes(storageRef, file);
+            const downloadURL = await getDownloadURL(uploadTaskSnapshot.ref);
+
+            console.log("File available at", downloadURL);
+            document.getElementById("cv-photo-modern").src = downloadURL;
+            document.getElementById("cv-photo-minimalistic").src = downloadURL;
+          } catch (error) {
+            console.error("Upload error:", error);
+          }
+        } else {
+          console.error("No file selected for upload.");
+        }
+      });
+    }
+
+    // Invoke the setupFirebaseStorage function when the DOM is fully loaded
+    document.addEventListener("DOMContentLoaded", setupFirebaseStorage);
+  </script>
+
+  <script src="../javascript.js"></script>
 </body>
 
 </html>
