@@ -106,46 +106,6 @@ function removeEducation(element) {
   element.parentElement.remove(); // Remove the entire education block when the remove button is clicked.
 }
 
-// FORM SUBMISSION AND VALIDATION FOR RESUME BUILDER
-
-// Attaches event listener to the resume form to handle submission.
-document
-  .getElementById("resume-form")
-  .addEventListener("submit", function (event) {
-    event.preventDefault(); // Prevents default form submission behavior (page reload).
-
-    // Collects form data into an object.
-    var formData = {
-      fullName: document.getElementById("full-name").value, // Retrieves full name from form.
-      email: document.getElementById("email").value, // Retrieves email from form.
-      phone: document.getElementById("phone").value, // Retrieves phone number from form.
-      // Additional data fields can be included here.
-    };
-
-    // Validates form data before processing.
-    if (!validateFormData(formData)) {
-      console.error("Validation failed."); // Logs error if validation fails.
-      return; // Stops form submission process if validation fails.
-    }
-
-    console.log("Form data is valid:", formData); // Logs valid form data for confirmation.
-    // Place code for further data processing (e.g., Firebase submission) here.
-  });
-
-// Validates the form data.
-function validateFormData(data) {
-  // Performs validation checks (required fields, email format, etc.).
-  // Returns true if all checks pass, or false otherwise.
-  // Current implementation assumes all data is valid.
-  return true;
-}
-
-// Displays validation errors on the user interface.
-function displayValidationErrors(errors) {
-  // Updates the UI to show validation error messages.
-  // Specific implementation depends on the UI design.
-}
-
 // TEMPLATES DISPLAY FUNCTIONALITY
 
 // Updates webpage with content for the Modern Template
@@ -218,7 +178,7 @@ function updateCVPreview(templateName) {
     "Passionate front-end developer leveraging modern frameworks for exceptional client experiences.";
 
   // Dynamically generates HTML for experiences and education
-  // (similar code for generating experiences and educations HTML should be here)
+  // (similar code for generating experiences and educations HTML should be added here)
 
   // Dynamically generate experiences and education HTML
 
@@ -360,3 +320,126 @@ function getCurrentTemplateName() {
   }
   return ""; // Default case if no template is selected
 }
+
+// DOWNLOAD RESUME AS PDF FUNCTIONALITY
+function downloadPDF() {
+  // Get the element that shows the resume preview based on the current template name.
+  const element = document.getElementById(
+    getCurrentTemplateName() + "-template-preview"
+  );
+
+  // Use html2canvas to take a screenshot of the resume preview element.
+  html2canvas(element, { scale: 2 }).then((canvas) => {
+    // Convert the canvas to an image data URL in PNG format.
+    const imgData = canvas.toDataURL("image/png");
+
+    // Initialize a new PDF document with the same dimensions as the canvas.
+    const pdf = new jspdf.jsPDF({
+      orientation: "portrait", // Set the PDF orientation to portrait.
+      unit: "pt", // Measurement unit for the PDF, points in this case.
+      format: [canvas.width, canvas.height], // Set the PDF size to match the canvas size.
+    });
+
+    // Add the screenshot image to the PDF.
+    pdf.addImage(imgData, "PNG", 0, 0, canvas.width, canvas.height);
+    // Save the PDF with the filename 'resume.pdf'.
+    pdf.save("resume.pdf");
+  });
+}
+
+/// FORM SUBMISSION AND PDF DOWNLOAD
+
+// Code to handle form submission without refreshing the page and download a PDF.
+// Add an event listener for the 'submit' event on the form with id 'resume-form'.
+document
+  .getElementById("resume-form")
+  .addEventListener("submit", function (event) {
+    event.preventDefault(); // Prevents the form from submitting in the default manner, which refreshes the page.
+
+    // Collect data from form fields into an object.
+    var formData = {
+      fullName: document.getElementById("full-name").value,
+      jobTitle: document.getElementById("job-title").value,
+      email: document.getElementById("email").value,
+    };
+
+    // Check if the form data passes validation checks.
+    if (!validateFormData(formData)) {
+      console.error("Validation failed."); // Log validation failure.
+      // Show an error message for validation failure.
+      displayValidationErrors(
+        "Please fill out all required fields for full name, job title, and email."
+      );
+      return; // Stop function execution if validation fails.
+    }
+
+    // Check if a template has been selected.
+    const templateName = getCurrentTemplateName();
+    if (!templateName) {
+      alert("Please select a template before downloading as PDF.");
+      return; // Stop function execution if no template is selected.
+    }
+
+    console.log("Form data is valid:", formData); // Log valid form data.
+
+    // If validation passes and a template is selected, proceed to download PDF.
+    downloadPDF(); // Function call to initiate PDF download.
+  });
+
+// VALIDATION FUNCTION FOR FORM DATA: For checking the form data is correctly filled.
+function validateFormData(formData) {
+  // Check if essential fields (full name, job title, and email) are not empty.
+  if (
+    !formData.fullName.trim() ||
+    !formData.jobTitle.trim() ||
+    !formData.email.trim()
+  ) {
+    return false; // Return false if any required field is empty.
+  }
+  return true; // Return true if all required fields are filled.
+}
+
+// Function to show validation error messages.
+function displayValidationErrors(message) {
+  const errorDisplayElement = document.getElementById("error-message-element");
+  if (!errorDisplayElement) {
+    // If the error display element does not exist, create it.
+    const errorContainer = document.createElement("div");
+    errorContainer.id = "error-message-element";
+    document.body.insertBefore(errorContainer, document.body.firstChild); // Insert at the beginning of the body.
+  }
+  document.getElementById("error-message-element").innerText = message; // Set the error message text.
+  document.getElementById("error-message-element").style.display = "block"; // Make the error message visible.
+}
+
+// FUNCTION TO PRINT RESUME
+document.getElementById("print-resume").addEventListener("click", function () {
+  var fullName = document.getElementById("full-name").value;
+
+  // Check if the full name is entered.
+  if (!fullName.trim()) {
+    alert("Please enter your full name to print the resume.");
+    return; // Stop function execution if full name is not entered.
+  }
+
+  const templateName = getCurrentTemplateName();
+  if (templateName) {
+    const printContent = document.getElementById(
+      templateName + "-template-preview"
+    );
+    const WinPrint = window.open(
+      "",
+      "",
+      "left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0"
+    );
+    WinPrint.document.write(printContent.innerHTML);
+    WinPrint.document.close();
+    WinPrint.focus();
+    setTimeout(() => {
+      WinPrint.print();
+      WinPrint.close();
+    }, 500);
+  } else {
+    alert("Please select a template to print.");
+  }
+});

@@ -318,6 +318,18 @@ html {
   /* Additional specific styles can be added if needed */
 }
 
+/* CV PHOTO STYLES - ENSURES CV PHOTOS FIT WITHIN DESIGNATED SIZES */
+.resume-template .modern #cv-photo-modern,
+.resume-template .minimalistic #cv-photo-minimalistic {
+  width: 197px; /* Sets the width to 5cm (converted to pixels), ensuring photos fit within designated space */
+  height: 197px; /* Sets the height to 5cm (converted to pixels), matching the width for a square aspect ratio */
+  object-fit: cover; /* Ensures photos cover the area fully without distortion, cropping excess parts if necessary */
+}
+
+.drop-area:hover {
+  border-color: #ff6b6b; /* Change border color on hover for visual feedback */
+}
+
 /* MODERN TEMPLATE STYLES - ENHANCED VISUALS FOR MODERN TEMPLATE */
 
 /* Basic styling for the modern template container */

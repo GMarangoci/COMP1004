@@ -223,6 +223,10 @@
             <button type="submit" class="btn cta">
               Download Resume As PDF
             </button>
+            <!-- Print Button -->
+            <button type="button" id="print-resume" class="btn cta">
+              Print Resume
+            </button>
           </div>
         </form>
       </section>
@@ -274,7 +278,43 @@
     const app = initializeApp(firebaseConfig);
     const storage = getStorage(app);
 
-    // Functionality related to Firebase Storage
+    // Resize image before upload
+    function resizeImage(file, maxWidth, maxHeight, callback) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = new Image();
+        img.onload = () => {
+          let width = img.width;
+          let height = img.height;
+
+          if (width > height) {
+            if (width > maxWidth) {
+              height *= maxWidth / width;
+              width = maxWidth;
+            }
+          } else {
+            if (height > maxHeight) {
+              width *= maxHeight / height;
+              height = maxHeight;
+            }
+          }
+
+          const canvas = document.createElement("canvas");
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext("2d");
+          ctx.drawImage(img, 0, 0, width, height);
+
+          canvas.toBlob((blob) => {
+            callback(blob, canvas.toDataURL("image/png")); // Pass the data URLL 
+          });
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // SetupFirebaseStorage to include resize, feedback, and button text change
     function setupFirebaseStorage() {
       const uploadPhotoButton = document.getElementById("upload-photo");
       const cvPhotoInput = document.getElementById("cv-photo");
@@ -282,29 +322,45 @@
       uploadPhotoButton.addEventListener("click", async () => {
         if (cvPhotoInput.files.length > 0) {
           const file = cvPhotoInput.files[0];
-          const storageRef = ref(storage, `photo_upload/${file.name}`);
 
-          try {
-            const uploadTaskSnapshot = await uploadBytes(storageRef, file);
-            const downloadURL = await getDownloadURL(uploadTaskSnapshot.ref);
+          // Resize image
+          resizeImage(file, 197, 197, async (blob, dataUrl) => { // 5cm x 5cm 
+            const storageRef = ref(storage, `photo_upload/${file.name}`);
 
-            console.log("File available at", downloadURL);
-            document.getElementById("cv-photo-modern").src = downloadURL;
-            document.getElementById("cv-photo-minimalistic").src = downloadURL;
-          } catch (error) {
-            console.error("Upload error:", error);
-          }
+            try {
+              const uploadTaskSnapshot = await uploadBytes(storageRef, blob);
+              const downloadURL = await getDownloadURL(uploadTaskSnapshot.ref);
+
+              console.log("File available at", downloadURL);
+              // Use the data URL for the image src to avoid CORS issues with canvas
+              document.getElementById("cv-photo-modern").src = dataUrl;
+              document.getElementById("cv-photo-minimalistic").src = dataUrl;
+
+              // Feedback to user
+              alert("Photo uploaded successfully!");
+
+              // Change button text
+              uploadPhotoButton.textContent = "Replace Photo";
+            } catch (error) {
+              console.error("Upload error:", error);
+              alert("Failed to upload photo.");
+            }
+          });
         } else {
           console.error("No file selected for upload.");
+          alert("Please select a file to upload.");
         }
       });
     }
 
     // Invoke the setupFirebaseStorage function when the DOM is fully loaded
     document.addEventListener("DOMContentLoaded", setupFirebaseStorage);
-  </script>
 
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
   <script src="../javascript.js"></script>
+
 </body>
 
 </html>
