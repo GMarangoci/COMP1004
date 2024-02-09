@@ -166,8 +166,7 @@ function updateCVPreview(templateName) {
     document.getElementById("email").value || "karlasantos@example.com";
   let phone = document.getElementById("phone").value || "0769828333";
   let linkedin =
-    document.getElementById("linkedin").value ||
-    "https://www.linkedin.com/in/karla-santos";
+    document.getElementById("linkedin").value || "https://www.linkedin.com/in/";
   let jobTitle =
     document.getElementById("job-title").value ||
     (templateName === "modern"
@@ -177,8 +176,40 @@ function updateCVPreview(templateName) {
     document.getElementById("personal-summary").value ||
     "Passionate front-end developer leveraging modern frameworks for exceptional client experiences.";
 
-  // Dynamically generates HTML for experiences and education
-  // (similar code for generating experiences and educations HTML should be added here)
+  let linkedinElementModern = document.querySelector(
+    "#modern-template-preview .modern-contact-info li:nth-child(3) a"
+  );
+  let linkedinElementMinimalistic = document.querySelector(
+    "#minimalistic-template-preview .minimalistic-contact-info li:nth-child(3) a"
+  );
+
+  if (linkedin.trim() === "" || linkedin === "https://www.linkedin.com/in/") {
+    // If LinkedIn input is empty, hide the LinkedIn information in both templates
+    if (linkedinElementModern) {
+      linkedinElementModern.parentElement.style.display = "none";
+    }
+    if (linkedinElementMinimalistic) {
+      linkedinElementMinimalistic.parentElement.style.display = "none";
+    }
+  } else {
+    // If LinkedIn input is not empty, show and update the LinkedIn information
+    if (linkedinElementModern) {
+      linkedinElementModern.parentElement.style.display = "list-item";
+      linkedinElementModern.href = linkedin;
+      linkedinElementModern.textContent = linkedin.replace(
+        "https://www.linkedin.com/in/",
+        ""
+      );
+    }
+    if (linkedinElementMinimalistic) {
+      linkedinElementMinimalistic.parentElement.style.display = "list-item";
+      linkedinElementMinimalistic.href = linkedin;
+      linkedinElementMinimalistic.textContent = linkedin.replace(
+        "https://www.linkedin.com/in/",
+        ""
+      );
+    }
+  }
 
   // Dynamically generate experiences and education HTML
 
