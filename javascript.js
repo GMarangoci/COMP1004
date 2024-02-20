@@ -53,14 +53,16 @@ document
         <input type="text" id="company_${experienceCount}" name="company_${experienceCount}" placeholder="Company Name" required onchange="updateCVPreview(getCurrentTemplateName())">
         <input type="text" id="role_${experienceCount}" name="role_${experienceCount}" placeholder="Role" required onchange="updateCVPreview(getCurrentTemplateName())">
         <label for="start_date_${experienceCount}">Start Date:</label>
-        <input type="month" id="start_date_${experienceCount}" name="start_date_${experienceCount}" onchange="updateCVPreview(getCurrentTemplateName())">
+        <input type="text" class="date" id="start_date_${experienceCount}" name="start_date_${experienceCount}">
         <label for="end_date_${experienceCount}" class="end-date-label">End Date:</label>
-        <input type="month" id="end_date_${experienceCount}" name="end_date_${experienceCount}" onchange="updateCVPreview(getCurrentTemplateName())">
+        <input type="text" class="date" id="end_date_${experienceCount}" name="end_date_${experienceCount}">
         <label class="present-label"><input type="checkbox" id="present_${experienceCount}" name="present_${experienceCount}" onchange="handlePresentCheckbox(${experienceCount});"> I currently work here</label>
         <textarea id="description_${experienceCount}" name="description_${experienceCount}" placeholder="Description" required onchange="updateCVPreview(getCurrentTemplateName())"></textarea>
         <button type="button" onclick="removeExperience(this)">Remove</button>
     `;
     container.appendChild(newField); // Append the new experience block to the container
+    // Initialize Flatpickr for the newly added fields
+    initializeFlatpickrForNewFields();
   });
 
 // Function to handle the state of the 'Present' checkbox for an experience entry
@@ -237,7 +239,9 @@ function updateCVPreview(templateName) {
         "Example Description";
 
       // Build and add the experience entry HTML to the experiencesHtml string
-      experiencesHtml += `<li>${company} - ${role} (${startDate} to ${present}): ${description}</li>`;
+      experiencesHtml += `<li>${company} - ${role} (${formatDate(
+        startDate
+      )} to ${present}): ${description}</li>`;
     }
   }
 
@@ -474,3 +478,45 @@ document.getElementById("print-resume").addEventListener("click", function () {
     alert("Please select a template to print.");
   }
 });
+
+// FLATPICKR INITIALIZATION FOR DYNAMICALLY ADDED DATE FIELDS
+function initializeFlatpickrForNewFields() {
+  // Select all date input fields that have not already been initialized by Flatpickr.
+  const dateInputs = document.querySelectorAll(".date:not(.flatpickr-input)");
+
+  // Iterate through each uninitiated date input field to apply Flatpickr.
+  dateInputs.forEach((input) => {
+    // Initialize Flatpickr on the input field with specific configurations.
+    flatpickr(input, {
+      // Set the date format to Year-Month-Day for consistency.
+      dateFormat: "Y-m-d",
+      // Define an onChange event function that triggers when a date is selected.
+      onChange: function (selectedDates, dateStr, instance) {
+        // Call the function to update the resume preview with the selected date.
+        updateCVPreview(getCurrentTemplateName());
+        // Update the input field's value with the selected date string.
+        input.value = dateStr;
+      },
+    });
+  });
+}
+
+// DATE FORMATTING FUNCTIONALITY
+function formatDate(dateStr) {
+  // Convert the string date input into a Date object.
+  const date = new Date(dateStr);
+
+  // Extract the year from the Date object.
+  const year = date.getFullYear();
+
+  // Extract the month from the Date object and add 1 to it (months are zero-indexed).
+  const month = date.getMonth() + 1;
+
+  // Extract the day from the Date object.
+  const day = date.getDate();
+
+  // Construct the date string in 'YYYY-MM-DD' format and return it.
+  return `${year}-${month < 10 ? "0" + month : month}-${
+    day < 10 ? "0" + day : day
+  }`;
+}
