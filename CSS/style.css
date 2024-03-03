@@ -22,6 +22,12 @@ html {
   flex: 1; /* Allows the section to expand and contract as needed, filling available space */
   width: 100%; /* Each section will occupy the full width of its parent container */
 }
+
+:focus {
+  outline: 2px solid #ff6b6b;
+  outline-offset: 2px;
+}
+
 /* HEADER STYLES - USED ON ALL PAGES */
 .header {
   display: flex; /* Uses flexbox for a flexible layout */
