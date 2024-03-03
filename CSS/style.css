@@ -10,12 +10,18 @@ html {
 }
 
 .container {
+  display: flex; /* Establishes a flex container for flexible box layout */
+  flex-direction: column; /* Stacks child elements (main sections) vertically */
+  height: 100vh; /* Sets the container height to be the full height of the viewport */
   width: 100%; /* Makes sure the container takes up the full width of the screen */
   max-width: 100%; /* Prevents the container from getting wider than the screen */
-  max-height: 100vh; /* Prevents the container from getting taller than the viewport height */
   margin: 0 auto; /* Centers the container on the page */
 }
 
+.page-section {
+  flex: 1; /* Allows the section to expand and contract as needed, filling available space */
+  width: 100%; /* Each section will occupy the full width of its parent container */
+}
 /* HEADER STYLES - USED ON ALL PAGES */
 .header {
   display: flex; /* Uses flexbox for a flexible layout */
