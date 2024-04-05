@@ -33,8 +33,13 @@
             <a href="#" class="nav-link" onclick="navigateTo('buildResume'); return false;">Build Resume</a>
           </li>
           <!-- LOGIN PAGE LINK: Navigates to Log In section -->
-          <li class="nav-item">
+          <li class="nav-item" id="loginNavItem">
             <a href="#" class="nav-link" onclick="navigateTo('logIn'); return false;">Log In</a>
+          </li>
+          <li class="nav-item user-info" style="display: none;" id="userInfoNavItem">
+            <span id="userEmail" class="user-email"></span> <!-- Display user email here -->
+            <button id="signOutButton" class="btn sign-out-btn">Sign Out</button>
+
           </li>
         </ul>
       </nav>
@@ -290,6 +295,9 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js";
     import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-auth.js";
     import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-storage.js";
+    import { getFirestore } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js";
+    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-auth.js";
+
 
     const firebaseConfig = {
       apiKey: "AIzaSyCOLRzioTQibxjYYWvDEUC_T1m-ZsUEYWs",
@@ -304,6 +312,83 @@
     const app = initializeApp(firebaseConfig);
     const storage = getStorage(app);
     const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    // Registration 
+
+    document
+      .getElementById("registration-form")
+      .addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const email = document.getElementById("register-email").value;
+        const password = document.getElementById("register-password").value;
+        const confirmPassword = document.getElementById("confirm-password").value;
+
+        if (password !== confirmPassword) {
+          alert("Passwords do not match.");
+          return;
+        }
+
+        try {
+          const userCredential = await createUserWithEmailAndPassword(
+            auth,
+            email,
+            password
+          );
+          console.log("User registered: ", userCredential.user);
+          alert("Registration successful. Please log in.");
+          // Redirect or handle post-registration logic here
+        } catch (error) {
+          console.error("Registration error: ", error);
+          alert("Failed to register: " + error.message);
+        }
+      });
+
+    // Listen for authentication state to change.
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, show the user's email and "Sign Out" button
+        onLoginSuccess(user.email);
+      } else {
+        // User is signed out, show the "Log In" button
+        document.getElementById('loginNavItem').style.display = 'block';
+        document.getElementById('userInfoNavItem').style.display = 'none';
+      }
+    });
+    function onLoginSuccess(userEmail) {
+      const loginNavItem = document.getElementById("loginNavItem");
+      const userInfoNavItem = document.getElementById("userInfoNavItem");
+
+      if (loginNavItem && userInfoNavItem) {
+        loginNavItem.style.display = "none"; // Hide the Log In button
+        document.getElementById("userEmail").textContent = userEmail; // Set user's email
+        userInfoNavItem.style.display = "block"; // Show user info and Sign Out button
+      } else {
+        console.error("Element(s) not found: Check IDs");
+      }
+    }
+
+    // Sign out function
+    function signOut() {
+      auth
+        .signOut()
+        .then(() => {
+          // On successful sign out
+          alert("Signed out successfully");
+          document.getElementById("loginNavItem").style.display = "block"; // Show the Log In button
+          document.getElementById("userInfoNavItem").style.display = "none"; // Hide user info and Sign Out button
+          navigateTo("home"); // Navigate to the home page or wherever you see fit
+        })
+        .catch((error) => {
+          // Handle errors here
+          console.error("Sign Out Error", error);
+          alert("Failed to sign out. Please try again.");
+        });
+    }
+
+
+
 
     // Resize image before upload
     function resizeImage(file, maxWidth, maxHeight, callback) {
@@ -345,6 +430,14 @@
     function setupFirebaseStorage() {
       const uploadPhotoButton = document.getElementById("upload-photo");
       const cvPhotoInput = document.getElementById("cv-photo");
+
+
+      const signOutButton = document.getElementById("signOutButton");
+      if (signOutButton) {
+        signOutButton.addEventListener("click", signOut);
+      }
+
+
 
       uploadPhotoButton.addEventListener("click", async () => {
         if (cvPhotoInput.files.length > 0) {
