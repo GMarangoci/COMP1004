@@ -252,6 +252,30 @@
       </section>
     </main>
 
+    <!-- REGISTRATION SECTION: Contains form for registering a new account, hidden by default -->
+    <main id="register" class="page-section" style="display: none">
+      <section class="login-container">
+        <h1 class="login-title">Register for an Account</h1>
+        <form class="login-form" id="registration-form">
+          <label for="register-email">Email:</label>
+          <input type="email" id="register-email" name="register-email" required />
+
+          <label for="register-password">Password:</label>
+          <input type="password" id="register-password" name="register-password" required />
+
+          <label for="confirm-password">Confirm Password:</label>
+          <input type="password" id="confirm-password" name="confirm-password" required />
+
+          <button type="submit" class="btn">Register</button>
+          <!-- LOGIN PROMPT: Link to navigate to the login section -->
+          <p class="register-prompt">
+            Already have an account?
+            <a href="#" class="nav-link" onclick="navigateTo('logIn'); return false;">Log in here</a>
+          </p>
+        </form>
+      </section>
+    </main>
+
     <!-- FOOTER: Footer of the website with copyright notice -->
     <footer class="footer">
       <p>© 2024 CareerCanvas COMP1004 Project. All rights reserved.</p>
@@ -264,6 +288,7 @@
   <script type="module">
     // Firebase SDK inclusion and initialization
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-auth.js";
     import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-storage.js";
 
     const firebaseConfig = {
@@ -278,6 +303,7 @@
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const storage = getStorage(app);
+    const auth = getAuth(app);
 
     // Resize image before upload
     function resizeImage(file, maxWidth, maxHeight, callback) {
@@ -353,6 +379,7 @@
         }
       });
     }
+
 
     // Invoke the setupFirebaseStorage function when the DOM is fully loaded
     document.addEventListener("DOMContentLoaded", setupFirebaseStorage);
