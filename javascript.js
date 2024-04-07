@@ -520,3 +520,55 @@ function formatDate(dateStr) {
     day < 10 ? "0" + day : day
   }`;
 }
+
+function getFormData() {
+  // Static fields
+  const formData = {
+    fullName: document.getElementById("full-name").value,
+    jobTitle: document.getElementById("job-title").value,
+    email: document.getElementById("email").value,
+    phone: document.getElementById("phone").value,
+    linkedin: document.getElementById("linkedin").value,
+    personalSummary: document.getElementById("personal-summary").value,
+    // Dynamic fields will be added into these arrays
+    experiences: [],
+    educations: [],
+  };
+
+  // Dynamic experiences
+  document.querySelectorAll(".experience-block").forEach((block, index) => {
+    const experience = {
+      company: document.getElementById(`company_${index + 1}`).value,
+      role: document.getElementById(`role_${index + 1}`).value,
+      startDate: document.getElementById(`start_date_${index + 1}`).value,
+      endDate: document.getElementById(`end_date_${index + 1}`).value,
+      present: document.getElementById(`present_${index + 1}`).checked,
+      description: document.getElementById(`description_${index + 1}`).value,
+    };
+    formData.experiences.push(experience);
+  });
+
+  // Dynamic educations
+  document.querySelectorAll(".education-block").forEach((block, index) => {
+    const education = {
+      school: document.getElementById(`school_${index + 1}`).value,
+      degree: document.getElementById(`degree_${index + 1}`).value,
+      year: document.getElementById(`year_${index + 1}`).value,
+    };
+    formData.educations.push(education);
+  });
+
+  return formData;
+}
+
+function displayCVsForSelection(cvs) {
+  const select = document.createElement("select");
+  cvs.forEach((cv) => {
+    const option = document.createElement("option");
+    option.value = cv.id;
+    option.textContent = `CV saved on ${cv.timestamp
+      .toDate()
+      .toLocaleString()}`; // Format timestamp
+    select.appendChild(option);
+  });
+}
