@@ -245,7 +245,7 @@
             <button type="button" id="print-resume" class="btn cta">
               Print Resume
               <!-- Save CV Button -->
-              <button type="button" id="save-cv" class="btn cta">
+              <button type="button" id="save-cv" class="btn cta save-cv-btn">
                 Save CV
               </button>
             </button>
@@ -358,10 +358,14 @@
     const auth = getAuth(app);
     const db = getFirestore(app);
 
+
+
     document.addEventListener("DOMContentLoaded", () => {
       handleLoginFormSubmission(); // Attach the login form event listener
       setupFirebaseStorage(); // Set up Firebase storage
       fetchAndDisplayUserCVs(); // Fetch and display the user's saved CVs
+
+
       // Get the modal element
       var modal = document.getElementById("cvModal");
 
@@ -389,17 +393,6 @@
       };
     });
 
-    // Event listener for the Load CV button to open the modal
-    document
-      .querySelector(".load-cv-btn")
-      .addEventListener("click", async () => {
-        // Display the modal
-        const cvModal = document.getElementById("cvModal");
-        cvModal.style.display = "block";
-
-        // Call a function to fetch CVs and populate the modal
-        await fetchAndDisplayUserCVs();
-      });
 
     async function loadSelectedCV(cvId) {
       // Assuming `db` is your initialized Firestore database instance
@@ -415,13 +408,16 @@
     }
 
     async function fetchAndDisplayUserCVs() {
+      console.log("fetchAndDisplayUserCVs() called"); // Log when the function is called
+
       // Assuming you're logged in
       const user = auth.currentUser;
       if (!user) {
         console.error("Not logged in");
-
         return;
       }
+
+      console.log("Fetching CVs for user:", user.uid); // Log the user's UID
 
       const cvListElement = document.getElementById("cvList");
       cvListElement.innerHTML = ""; // Clear previous list items
@@ -432,16 +428,18 @@
       );
 
       const querySnapshot = await getDocs(cvsQuery);
+      console.log("CVs fetched:", querySnapshot.docs.length); // Log the number of CVs fetched
+
       querySnapshot.forEach((doc) => {
+        console.log("Processing CV:", doc.id); // Log each CV being processed
         const listItem = document.createElement("li");
         listItem.textContent = `CV saved on ${new Date(
           doc.data().timestamp.seconds * 1000
         ).toLocaleString()}`;
-        listItem.classList.add("cv-list-item"); // Add class for styling if desired
-        listItem.setAttribute("data-cv-id", doc.id); // Store the CV id
+        listItem.classList.add("cv-list-item");
+        listItem.setAttribute("data-cv-id", doc.id);
         listItem.onclick = async () => {
           await loadSelectedCV(doc.id);
-          // Close the modal if you want to close it after a CV is selected
           document.getElementById("cvModal").style.display = "none";
         };
         cvListElement.appendChild(listItem);
@@ -482,9 +480,16 @@
         addEducationField(edu);
       });
 
+      // Update template selection based on cvData
+      if (cvData.templateName) {
+        selectTemplate(cvData.templateName);
+      }
+
       // Update the CV preview to reflect the newly populated data
       updateCVPreview(getCurrentTemplateName());
     }
+
+
 
     // Registration
     document
@@ -560,13 +565,10 @@
         "path-to-default-photo.jpg";
 
       // Clear out the sections for work experience and education.
-      // This is because these sections can dynamically have content added to them,
-      // and we need to ensure they're emptied when resetting the form.
+
       document.getElementById("work-experience-section").innerHTML = "";
       document.getElementById("education-section").innerHTML = "";
 
-      // Since we switched to using a modal for CV selection instead of a dropdown,
-      // we'll clear any CVs listed inside the modal. This ensures the modal is reset and ready for the next use.
       const cvListElement = document.getElementById("cvList");
       if (cvListElement) {
         cvListElement.innerHTML = ""; // Clears the list of CVs inside the modal.
@@ -674,33 +676,49 @@
       const uploadPhotoButton = document.getElementById("upload-photo");
       const cvPhotoInput = document.getElementById("cv-photo");
 
+      // FUNCTION TO SAVE CV DATA TO FIRESTORE: This function saves the user's CV data, including the selected template, to Firestore.
       async function saveCVToFirestore() {
+        // Initialize Firebase services
         const auth = getAuth(app);
         const db = getFirestore(app);
 
-        // Fetch form data as before
+        // Retrieve form data using the getFormData function
         const formData = getFormData();
 
-        // Add a timestamp to the formData object
-        formData.timestamp = serverTimestamp(); // Firestore server timestamp
+        // Add a timestamp to the formData object for ordering purposes
+        formData.timestamp = serverTimestamp(); // Use Firestore's serverTimestamp for consistency
+
+        // Get the currently logged-in user
         const user = auth.currentUser;
+
+        // If no user is logged in, alert the user and exit the function
         if (!user) {
           alert("You need to be logged in to save your CV.");
           return;
         }
 
+        // Include the currently selected template name in the formData object
+        const templateName = getCurrentTemplateName(); // Get the current template name from the UI
+        formData.templateName = templateName; // Add the template name to the formData object
+
+        // Attempt to save the CV data to Firestore
         try {
-          //
+          // Use Firestore's addDoc function to save the formData to the 'cvs' collection
           await addDoc(collection(db, "cvs"), {
             ...formData,
-            uid: user.uid,
+            uid: user.uid, // Include the user's UID for user-specific data storage
           });
+          // Alert the user that the CV was saved successfully
           alert("CV saved successfully.");
+          // After saving, refresh the list of CVs to include the newly saved CV
+          await fetchAndDisplayUserCVs(); // Call the function to fetch and display the user's CVs
         } catch (error) {
+          // If an error occurs during saving, log the error and alert the user
           console.error("Error saving CV:", error);
           alert("Failed to save CV. Please try again.");
         }
       }
+
 
       const saveCVButton = document.getElementById("save-cv");
       if (saveCVButton) {

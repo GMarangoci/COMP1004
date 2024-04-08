@@ -77,6 +77,11 @@ html {
   transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
 }
 
+.user-info {
+  display: flex;
+  align-items: center; /* Ensure vertical alignment for user info */
+}
+
 .navigation .nav-link:hover {
   background-color: #0d2f4b; /* Changes background color on hover */
   color: #ffffff; /* Keeps text color white on hover */
@@ -346,7 +351,7 @@ html {
 /* Container for the submit button */
 .submit-button-container {
   text-align: center; /* Centers the submit button */
-  margin-top: 20px; /* Adds space above the container */
+  margin-top: 10px; /* Adds space above the container */
 }
 
 /* Styles for template selection buttons */
@@ -622,12 +627,16 @@ html {
   font-size: 0.9rem; /* Smaller font size for a balanced look */
 }
 
+.save-cv-btn {
+  margin-left: 5px;
+}
+
 /* Style the user email to align with buttons */
 .user-email {
   margin-right: 10px; /* Adds spacing between the email and the 'Load CV' button */
   line-height: 2; /* Adjusts the line height to center text with buttons */
 }
-
+/* MODAL PLUGIN STYLES - FOR MODAL OVERLAY COMPONENT */
 /* Enhanced Modal Overlay */
 .modal {
   display: none;
