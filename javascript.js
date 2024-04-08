@@ -1,8 +1,7 @@
 // GENERAL NAVIGATION FUNCTIONALITY
 
-// Function for changing pages without reloading the website.
 function navigateTo(page) {
-  console.log("Navigating to:", page); // Logs which page we're going to, helpful for debugging.
+  console.log("Navigating to:", page); // Logs which page we're going to, for debugging.
 
   // Hides all sections of the website before showing the new one.
   document.querySelectorAll(".page-section").forEach((section) => {
@@ -16,10 +15,24 @@ function navigateTo(page) {
   } else {
     console.error(`No section found with id '${page}'.`); // If we can't find the section, log an error.
   }
+
+  // Adjust the visibility of the Load CV button based on the page
+  var loadCVButton = document.querySelector(".load-cv-btn");
+  if (page === "buildResume" && loadCVButton) {
+    loadCVButton.style.display = "inline-block"; // Show the Load CV button on the Build Resume page
+  } else if (loadCVButton) {
+    loadCVButton.style.display = "none"; // Hide the Load CV button on other pages
+  }
 }
 
-// When the website is fully loaded, this sets up the navigation.
+// When the website is fully loaded, this sets up the navigation and initially hides the Load CV button unless on the Build Resume page.
 document.addEventListener("DOMContentLoaded", function () {
+  // Hide the Load CV button initially
+  var loadCVButton = document.querySelector(".load-cv-btn");
+  if (loadCVButton) {
+    loadCVButton.style.display = "none";
+  }
+
   // For each navigation link, we add an event listener.
   document.querySelectorAll(".nav-link").forEach((link) => {
     link.addEventListener("click", function (event) {
@@ -29,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // When the website first loads, this takes us to the 'home' section.
+  // Navigate to the 'home' section by default or based on URL if logic for that is added later.
   navigateTo("home");
 });
 
@@ -521,8 +534,9 @@ function formatDate(dateStr) {
   }`;
 }
 
+// FUNCTION TO GATHER FORM DATA: Creates an object containing all the user inputs from the resume form.
 function getFormData() {
-  // Static fields
+  // INITIALIZES AN OBJECT to store the user's inputs, starting with basic personal information.
   const formData = {
     fullName: document.getElementById("full-name").value,
     jobTitle: document.getElementById("job-title").value,
@@ -530,45 +544,123 @@ function getFormData() {
     phone: document.getElementById("phone").value,
     linkedin: document.getElementById("linkedin").value,
     personalSummary: document.getElementById("personal-summary").value,
-    // Dynamic fields will be added into these arrays
-    experiences: [],
-    educations: [],
+    experiences: [], // Prepares an array to store multiple experiences.
+    educations: [], // Prepares an array to store multiple education records.
   };
 
-  // Dynamic experiences
+  // ITERATES OVER ALL EXPERIENCE BLOCKS to collect data from each.
   document.querySelectorAll(".experience-block").forEach((block, index) => {
+    // Extracts and compiles experience information into an object, using fallbacks if fields are empty.
     const experience = {
-      company: document.getElementById(`company_${index + 1}`).value,
-      role: document.getElementById(`role_${index + 1}`).value,
-      startDate: document.getElementById(`start_date_${index + 1}`).value,
-      endDate: document.getElementById(`end_date_${index + 1}`).value,
-      present: document.getElementById(`present_${index + 1}`).checked,
-      description: document.getElementById(`description_${index + 1}`).value,
+      company: document.getElementById(`company_${index + 1}`)?.value || "",
+      role: document.getElementById(`role_${index + 1}`)?.value || "",
+      startDate:
+        document.getElementById(`start_date_${index + 1}`)?.value || "",
+      endDate: document.getElementById(`end_date_${index + 1}`)?.value || "",
+      present:
+        document.getElementById(`present_${index + 1}`)?.checked || false,
+      description:
+        document.getElementById(`description_${index + 1}`)?.value || "",
     };
+    // Logs each experience for debugging.
+    console.log(`Experience ${index}: `, experience);
+    // Adds the compiled experience object to the experiences array in formData.
     formData.experiences.push(experience);
   });
 
-  // Dynamic educations
+  // ITERATES OVER ALL EDUCATION BLOCKS to collect data from each.
   document.querySelectorAll(".education-block").forEach((block, index) => {
+    // Extracts and compiles education information into an object, using fallbacks if fields are empty.
     const education = {
-      school: document.getElementById(`school_${index + 1}`).value,
-      degree: document.getElementById(`degree_${index + 1}`).value,
-      year: document.getElementById(`year_${index + 1}`).value,
+      school: document.getElementById(`school_${index + 1}`)?.value || "",
+      degree: document.getElementById(`degree_${index + 1}`)?.value || "",
+      year: document.getElementById(`year_${index + 1}`)?.value || "",
     };
+    // Logs each education entry for debugging.
+    console.log(`Education ${index}: `, education);
+    // Adds the compiled education object to the educations array in formData.
     formData.educations.push(education);
   });
 
+  // Logs the complete formData object for review before returning it.
+  console.log("Final form data: ", formData);
+  // Returns the fully compiled formData object containing all user inputs.
   return formData;
 }
 
+// FUNCTION TO DISPLAY CVS FOR SELECTION: Creates a dropdown for user to select from available CVs.
 function displayCVsForSelection(cvs) {
+  // Create a dropdown select element
   const select = document.createElement("select");
+
+  // Loop through each CV object in the 'cvs' array
   cvs.forEach((cv) => {
+    // Create an option element for each CV
     const option = document.createElement("option");
+    // Set the value of the option to the CV's unique ID
     option.value = cv.id;
+    // Set the display text to include the save date of the CV
     option.textContent = `CV saved on ${cv.timestamp
       .toDate()
-      .toLocaleString()}`; // Format timestamp
+      .toLocaleString()}`;
+    // Append the option to the select dropdown
     select.appendChild(option);
   });
+}
+
+// FUNCTION TO ADD EXPERIENCE FIELD: Dynamically adds a new work experience section to the form. (For loading CVs files)
+function addExperienceField(exp) {
+  // Target the container where work experiences are displayed.
+  const container = document.getElementById("work-experience-section");
+
+  // Create a new div to hold the experience input fields.
+  const newField = document.createElement("div");
+  newField.classList.add("experience-block"); // Assign class for styling.
+
+  // Set the inner HTML of the new div with input fields for experience details. Use the provided 'exp' parameter for values.
+  newField.innerHTML = `
+    <input type="text" id="company_${experienceCount}" name="company_${experienceCount}" placeholder="Company Name" value="${
+    exp.company
+  }" required>
+    <input type="text" id="role_${experienceCount}" name="role_${experienceCount}" placeholder="Role" value="${
+    exp.role
+  }" required>
+    <input type="text" class="date" id="start_date_${experienceCount}" name="start_date_${experienceCount}" value="${
+    exp.startDate
+  }">
+    <input type="text" class="date" id="end_date_${experienceCount}" name="end_date_${experienceCount}" value="${
+    exp.endDate
+  }">
+    <input type="checkbox" id="present_${experienceCount}" name="present_${experienceCount}" ${
+    exp.present ? "checked" : ""
+  }>
+    <textarea id="description_${experienceCount}" name="description_${experienceCount}" required>${
+    exp.description
+  }</textarea>
+    <button type="button" onclick="removeExperience(this)">Remove</button>
+  `;
+
+  // Append the new experience block to the container.
+  container.appendChild(newField);
+}
+
+// FUNCTION TO ADD EDUCATION FIELD: Adds a new section for education details to the form. (For Loading CVs files)
+function addEducationField(edu) {
+  // Find the container for education entries.
+  const container = document.getElementById("education-section");
+
+  // Create a new div for the education inputs.
+  const newField = document.createElement("div");
+  newField.classList.add("education-block"); // Set the class for styling.
+
+  // Populate the new div with input fields, prefilling with 'edu' parameter values.
+  newField.innerHTML = `
+    <input type="text" id="school_${educationCount}" name="school_${educationCount}" placeholder="School/College Name" value="${edu.school}" required>
+    <input type="text" id="degree_${educationCount}" name="degree_${educationCount}" placeholder="Degree/Course" value="${edu.degree}" required>
+    <input type="text" id="year_${educationCount}" name="year_${educationCount}" placeholder="Year of Graduation" value="${edu.year}" required>
+    <button type="button" onclick="removeEducation(this)">Remove</button>
+  `;
+
+  // Add the new education section to the container.
+  container.appendChild(newField);
 }

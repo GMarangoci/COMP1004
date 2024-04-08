@@ -604,3 +604,128 @@ html {
 .experience-block button:hover {
   background-color: #ff6666; /* Lighter red on hover for interaction feedback */
 }
+
+.sign-out-btn {
+  padding: 0.3rem 1rem; /* Smaller padding to reduce button size */
+  font-size: 0.9rem; /* Smaller font size to match the reduced button size */
+  margin-left: 0.5rem; /* Add margin to separate from email */
+}
+
+/* This will affect all buttons that are alongside the email address */
+.user-info .btn {
+  margin-left: 10px; /* Adds spacing between the buttons */
+}
+
+/* Specifically style the 'Load CV' button */
+.load-cv-btn {
+  padding: 0.3rem 1rem; /* Smaller padding to align with 'Sign Out' button */
+  font-size: 0.9rem; /* Smaller font size for a balanced look */
+}
+
+/* Style the user email to align with buttons */
+.user-email {
+  margin-right: 10px; /* Adds spacing between the email and the 'Load CV' button */
+  line-height: 2; /* Adjusts the line height to center text with buttons */
+}
+
+/* Enhanced Modal Overlay */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000; /* Increase z-index for higher stack order */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.6
+  ); /* Darker overlay for better focus on modal */
+  overflow-y: auto; /* Allows scrolling on y-axis if modal content is longer */
+  animation: fadeIn 0.5s ease-out; /* Use ease-out for a smoother fade-in effect */
+}
+
+/* Polished Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fff;
+  margin: 5% auto; /* Reduced margin for better vertical alignment */
+  padding: 30px; /* Optimal padding for content */
+  border-radius: 8px; /* More pronounced rounded corners for a modern look */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Deeper shadow for more depth */
+  width: auto; /* Allows the modal to adjust based on content */
+  max-width: 600px; /* Slightly larger max width for more content */
+  animation: slideUp 0.5s ease-out; /* Change to slideUp for a lifting effect */
+}
+
+/* Enhanced Typography */
+h2 {
+  font-family: "Roboto", sans-serif;
+  font-size: 28px; /* Slightly larger for emphasis */
+  margin-bottom: 25px; /* Increased space below the title */
+  color: #333; /* Maintained color for readability */
+  text-align: center; /* Center-align title for better focus */
+}
+
+/* Interactive List Items */
+.cv-list li {
+  display: block;
+  margin: 0 0 10px; /* Uniform margin for cleaner alignment */
+  padding: 12px 15px; /* Increased padding for touch friendliness */
+  background-color: #f9f9f9;
+  border-radius: 6px; /* Slightly rounded corners for a softer look */
+  transition: background-color 0.3s ease-out, transform 0.2s ease-out; /* Smooth transitions for hover effects */
+  cursor: pointer; /* Indicates that list items are interactive */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.cv-list li:hover {
+  background-color: #e2e6ea; /* Slightly darker shade on hover for interaction feedback */
+  transform: translateY(-3px); /* Slight lift effect on hover */
+}
+
+/* Improved SVG Close Button */
+.close {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  cursor: pointer;
+  fill: #757575; /* Uniform fill color for consistency */
+  transition: fill 0.2s ease-out; /* Smooth transition for hover effect */
+}
+
+.close:hover {
+  fill: #ff6b6b; /* Matching button hover color for visual consistency */
+}
+
+/* Keyframes for Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px); /* Starts lower for a slide-up effect */
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 600px) {
+  .modal-content {
+    width: 95%; /* Increase width for smaller screens for better use of space */
+    margin: 10% auto; /* Increased margin for better visual separation */
+    padding: 20px; /* Adjusted padding for screen size */
+  }
+}
