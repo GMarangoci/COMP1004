@@ -608,59 +608,67 @@ function displayCVsForSelection(cvs) {
   });
 }
 
-// FUNCTION TO ADD EXPERIENCE FIELD: Dynamically adds a new work experience section to the form. (For loading CVs files)
+// Function to add event listeners to experience and education fields for real-time updates
+function addFieldEventListeners() {
+  document.querySelectorAll("input, textarea").forEach((input) => {
+    input.addEventListener("change", () => {
+      updateCVPreview(getCurrentTemplateName());
+    });
+  });
+}
+
+// Adjusted function to add experience fields with event listeners for real-time updates
 function addExperienceField(exp) {
-  // Target the container where work experiences are displayed.
   const container = document.getElementById("work-experience-section");
-
-  // Create a new div to hold the experience input fields.
+  experienceCount++; // Increment to ensure unique IDs
   const newField = document.createElement("div");
-  newField.classList.add("experience-block"); // Assign class for styling.
-
-  // Set the inner HTML of the new div with input fields for experience details. Use the provided 'exp' parameter for values.
+  newField.classList.add("experience-block");
   newField.innerHTML = `
     <input type="text" id="company_${experienceCount}" name="company_${experienceCount}" placeholder="Company Name" value="${
-    exp.company
+    exp.company || ""
   }" required>
     <input type="text" id="role_${experienceCount}" name="role_${experienceCount}" placeholder="Role" value="${
-    exp.role
+    exp.role || ""
   }" required>
     <input type="text" class="date" id="start_date_${experienceCount}" name="start_date_${experienceCount}" value="${
-    exp.startDate
+    exp.startDate || ""
   }">
     <input type="text" class="date" id="end_date_${experienceCount}" name="end_date_${experienceCount}" value="${
-    exp.endDate
+    exp.endDate || ""
   }">
     <input type="checkbox" id="present_${experienceCount}" name="present_${experienceCount}" ${
     exp.present ? "checked" : ""
   }>
     <textarea id="description_${experienceCount}" name="description_${experienceCount}" required>${
-    exp.description
+    exp.description || ""
   }</textarea>
     <button type="button" onclick="removeExperience(this)">Remove</button>
   `;
-
-  // Append the new experience block to the container.
   container.appendChild(newField);
+
+  addFieldEventListeners(); // Add event listeners for real-time updates
+  initializeFlatpickrForNewFields(); // Reinitialize Flatpickr for newly added date fields
 }
 
-// FUNCTION TO ADD EDUCATION FIELD: Adds a new section for education details to the form. (For Loading CVs files)
+// Adjusted function to add education fields with event listeners for real-time updates
 function addEducationField(edu) {
-  // Find the container for education entries.
   const container = document.getElementById("education-section");
-
-  // Create a new div for the education inputs.
+  educationCount++; // Increment to ensure unique IDs
   const newField = document.createElement("div");
-  newField.classList.add("education-block"); // Set the class for styling.
-
-  // Populate the new div with input fields, prefilling with 'edu' parameter values.
+  newField.classList.add("education-block");
   newField.innerHTML = `
-    <input type="text" id="school_${educationCount}" name="school_${educationCount}" placeholder="School/College Name" value="${edu.school}" required>
-    <input type="text" id="degree_${educationCount}" name="degree_${educationCount}" placeholder="Degree/Course" value="${edu.degree}" required>
-    <input type="text" id="year_${educationCount}" name="year_${educationCount}" placeholder="Year of Graduation" value="${edu.year}" required>
+    <input type="text" id="school_${educationCount}" name="school_${educationCount}" placeholder="School/College Name" value="${
+    edu.school || ""
+  }" required>
+    <input type="text" id="degree_${educationCount}" name="degree_${educationCount}" placeholder="Degree/Course" value="${
+    edu.degree || ""
+  }" required>
+    <input type="text" id="year_${educationCount}" name="year_${educationCount}" placeholder="Year of Graduation" value="${
+    edu.year || ""
+  }" required>
     <button type="button" onclick="removeEducation(this)">Remove</button>
   `;
-
-  // Add the new education section to the container.
   container.appendChild(newField);
+
+  addFieldEventListeners(); // Add event listeners for real-time updates
 }
