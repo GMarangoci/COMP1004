@@ -23,6 +23,14 @@ function navigateTo(page) {
   } else if (loadCVButton) {
     loadCVButton.style.display = "none"; // Hide the Load CV button on other pages
   }
+
+  // Similar logic for the Reset Fields button
+  var resetFieldsButton = document.getElementById("reset-cv-btn");
+  if (page === "buildResume" && resetFieldsButton) {
+    resetFieldsButton.style.display = "inline-block"; // Show the Reset Fields button on the Build Resume page
+  } else if (resetFieldsButton) {
+    resetFieldsButton.style.display = "none"; // Hide the Reset Fields button on other pages
+  }
 }
 
 // When the website is fully loaded, this sets up the navigation and initially hides the Load CV button unless on the Build Resume page.
@@ -42,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Navigate to the 'home' section by default or based on URL if logic for that is added later.
+  // Navigate to the 'home' section by default
   navigateTo("home");
 });
 
@@ -150,12 +158,13 @@ function selectTemplate(templateName) {
   const selectedTemplate = document.getElementById(
     templateName + "-template-preview"
   );
+
   if (selectedTemplate) {
-    selectedTemplate.style.display = "block";
-    document.querySelector(".submit-button-container").style.display = "block";
+    selectedTemplate.style.display = "block"; // Display the selected template
+    document.querySelector(".submit-button-container").style.display = "block"; // Ensure submit button is visible
     updateCVPreview(templateName); // Updates preview with selected template
   } else {
-    document.querySelector(".submit-button-container").style.display = "none";
+    document.querySelector(".submit-button-container").style.display = "none"; // Hide submit button if no template is selected
   }
 }
 
@@ -352,6 +361,58 @@ function updateCVPreview(templateName) {
     document.getElementById("minimalistic-education-list").innerHTML =
       educationsHtml;
   }
+  // Continue from the previous else if condition for "minimalistic"
+  else if (templateName === "professional") {
+    // Setting the full name in the professional template's header
+    document.querySelector(
+      "#professional-template-preview .professional-header h1"
+    ).textContent = fullName;
+
+    // Setting the job title in the professional template's header
+    document.querySelector(
+      "#professional-template-preview .professional-header h2"
+    ).textContent = jobTitle;
+
+    // Updating contact information: Email
+    document.querySelector(
+      "#professional-template-preview .professional-contact-info li:nth-child(1)"
+    ).textContent = `Email: ${email}`;
+
+    // Updating contact information: Phone
+    document.querySelector(
+      "#professional-template-preview .professional-contact-info li:nth-child(2)"
+    ).textContent = `Phone: ${phone}`;
+
+    // If the user have a LinkedIn section in professional template
+    // Updating contact information: LinkedIn
+    let linkedinElementProfessional = document.querySelector(
+      "#professional-template-preview .professional-contact-info li:nth-child(3) a"
+    );
+    if (linkedin && linkedin !== "https://www.linkedin.com/in/") {
+      linkedinElementProfessional.href = linkedin;
+      linkedinElementProfessional.textContent = linkedin.replace(
+        "https://www.linkedin.com/in/",
+        ""
+      );
+      linkedinElementProfessional.parentElement.style.display = "list-item";
+    } else {
+      // If LinkedIn information is not provided, hide this section
+      if (linkedinElementProfessional) {
+        linkedinElementProfessional.parentElement.style.display = "none";
+      }
+    }
+
+    // Setting the personal summary in the professional template
+    document.querySelector(
+      "#professional-template-preview .professional-summary p"
+    ).textContent = personalSummary;
+
+    // Injecting the dynamically generated experiences and education into the professional template
+    document.getElementById("professional-experience-list").innerHTML =
+      experiencesHtml;
+    document.getElementById("professional-education-list").innerHTML =
+      educationsHtml;
+  }
 }
 
 // Function to get the current template name based on which template is displayed
@@ -365,6 +426,11 @@ function getCurrentTemplateName() {
     "block"
   ) {
     return "minimalistic";
+  } else if (
+    document.getElementById("professional-template-preview").style.display ===
+    "block"
+  ) {
+    return "professional"; // Added condition for the Professional template
   }
   return ""; // Default case if no template is selected
 }
@@ -588,26 +654,6 @@ function getFormData() {
   return formData;
 }
 
-// FUNCTION TO DISPLAY CVS FOR SELECTION: Creates a dropdown for user to select from available CVs.
-function displayCVsForSelection(cvs) {
-  // Create a dropdown select element
-  const select = document.createElement("select");
-
-  // Loop through each CV object in the 'cvs' array
-  cvs.forEach((cv) => {
-    // Create an option element for each CV
-    const option = document.createElement("option");
-    // Set the value of the option to the CV's unique ID
-    option.value = cv.id;
-    // Set the display text to include the save date of the CV
-    option.textContent = `CV saved on ${cv.timestamp
-      .toDate()
-      .toLocaleString()}`;
-    // Append the option to the select dropdown
-    select.appendChild(option);
-  });
-}
-
 // Function to add event listeners to experience and education fields for real-time updates
 function addFieldEventListeners() {
   document.querySelectorAll("input, textarea").forEach((input) => {
@@ -617,12 +663,21 @@ function addFieldEventListeners() {
   });
 }
 
-// Adjusted function to add experience fields with event listeners for real-time updates
+// Function: Add Experience Field
+// This function dynamically adds a new experience entry field into the resume form, enhancing user interaction by allowing real-time data entry and updates.
+
 function addExperienceField(exp) {
+  // Locate the container where experience fields are displayed.
   const container = document.getElementById("work-experience-section");
-  experienceCount++; // Increment to ensure unique IDs
+
+  // Increment a global counter to ensure each experience field has a unique identifier.
+  experienceCount++;
+
+  // Create a new div element to hold the input fields for a single experience entry.
   const newField = document.createElement("div");
-  newField.classList.add("experience-block");
+  newField.classList.add("experience-block"); // Assign a class for styling purposes.
+
+  // Set the innerHTML of the new div to include various input fields pre-filled with data (if any exists).
   newField.innerHTML = `
     <input type="text" id="company_${experienceCount}" name="company_${experienceCount}" placeholder="Company Name" value="${
     exp.company || ""
@@ -643,19 +698,32 @@ function addExperienceField(exp) {
     exp.description || ""
   }</textarea>
     <button type="button" onclick="removeExperience(this)">Remove</button>
-  `;
-  container.appendChild(newField);
+  `; // The template string dynamically incorporates the experience count into IDs and names, ensuring unique access and manipulation points.
 
-  addFieldEventListeners(); // Add event listeners for real-time updates
-  initializeFlatpickrForNewFields(); // Reinitialize Flatpickr for newly added date fields
+  container.appendChild(newField); // Append the new experience entry field to the container.
+
+  // After adding a new field, reinitialize event listeners for input fields to capture real-time updates.
+  addFieldEventListeners();
+
+  // Reinitialize Flatpickr (date picker) for the newly added date input fields, ensuring a consistent UI experience.
+  initializeFlatpickrForNewFields();
 }
 
-// Adjusted function to add education fields with event listeners for real-time updates
+// Function: Add Education Field
+// Dynamically adds a new education entry field to the form, allowing users to input their academic background in real-time.
+
 function addEducationField(edu) {
+  // Identify the container for education entries within the form.
   const container = document.getElementById("education-section");
-  educationCount++; // Increment to ensure unique IDs
+
+  // Increment a global counter to maintain unique IDs for each education entry.
+  educationCount++;
+
+  // Create a new div element to encapsulate the inputs for one education entry.
   const newField = document.createElement("div");
-  newField.classList.add("education-block");
+  newField.classList.add("education-block"); // Assign styling class for consistent UI.
+
+  // Populate the new div with input fields, prefilled with existing data (if provided).
   newField.innerHTML = `
     <input type="text" id="school_${educationCount}" name="school_${educationCount}" placeholder="School/College Name" value="${
     edu.school || ""
@@ -667,8 +735,10 @@ function addEducationField(edu) {
     edu.year || ""
   }" required>
     <button type="button" onclick="removeEducation(this)">Remove</button>
-  `;
-  container.appendChild(newField);
+  `; // The template string dynamically incorporates the education count into element IDs and names to ensure they are unique.
 
-  addFieldEventListeners(); // Add event listeners for real-time updates
+  container.appendChild(newField); // Append the new education entry to the specified container.
+
+  // After dynamically adding a new education field, ensure that event listeners are attached to new inputs for capturing real-time updates.
+  addFieldEventListeners();
 }

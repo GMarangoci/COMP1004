@@ -1,12 +1,14 @@
 /* GENERAL STYLES - APPLY GLOBALLY */
 body,
 html {
+  height: 100%;
   margin: 0; /* Removes the default margin around the page */
   padding: 0; /* Removes the default padding */
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; /* Sets a clean, modern font for the whole page */
   background-color: #f0f2f5; /* A light grey background color that's easy on the eyes */
   color: #333; /* A dark grey color for text, for good contrast and readability */
   text-rendering: optimizeLegibility; /* Helps make text clearer and more readable */
+  overflow-x: hidden;
 }
 
 .container {
@@ -16,6 +18,7 @@ html {
   width: 100%; /* Makes sure the container takes up the full width of the screen */
   max-width: 100%; /* Prevents the container from getting wider than the screen */
   margin: 0 auto; /* Centers the container on the page */
+  min-height: 100vh;
 }
 
 .page-section {
@@ -37,9 +40,9 @@ html {
   color: white; /* White text to stand out against the dark background */
   padding: 1rem; /* Adds some space inside the header */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* A subtle shadow for a bit of depth */
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+  position: sticky; /* Sticky position for most browsers */
+  top: 0; /* Sticks to the top of the viewport */
+  z-index: 1000; /* Ensures the header stays above other content */
 }
 
 .header,
@@ -72,14 +75,24 @@ html {
 .navigation .nav-link {
   color: #fff; /* White color for the links */
   text-decoration: none; /* Removes the underline from links */
-  padding: 0.5rem 1rem; /* Pads the links for easier clicking */
+  padding: 0.21rem 1rem; /* Pads the links for easier clicking */
   border-radius: 5px; /* Rounds the corners of the link backgrounds */
   transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
+}
+
+/* Ensure buttons and links have similar styling for consistency */
+.nav-link,
+.btn {
+  padding: 0.5rem 1rem; /* Adjust padding to match your design */
+  font-size: 1rem; /* Ensure font size is consistent */
+  text-decoration: none; /* Remove underline from links */
+  display: inline-block; /* Align items correctly */
 }
 
 .user-info {
   display: flex;
   align-items: center; /* Ensure vertical alignment for user info */
+  margin-left: 20px; /* Adjust as needed to space items evenly */
 }
 
 .navigation .nav-link:hover {
@@ -362,17 +375,29 @@ html {
 
 /* CV PHOTO STYLES - ENSURES CV PHOTOS FIT WITHIN DESIGNATED SIZES */
 .resume-template .modern #cv-photo-modern,
-.resume-template .minimalistic #cv-photo-minimalistic {
+.resume-template .minimalistic #cv-photo-minimalistic,
+.resume-template .professional #cv-photo-professional {
+  /* Added line for the professional template */
   width: 197px; /* Sets the width to 5cm (converted to pixels), ensuring photos fit within designated space */
   height: 197px; /* Sets the height to 5cm (converted to pixels), matching the width for a square aspect ratio */
   object-fit: cover; /* Ensures photos cover the area fully without distortion, cropping excess parts if necessary */
+}
+
+/* General Styles for All Resume Templates */
+.resume-template {
+  max-width: 800px; /* Adjust width as needed */
+  margin: 20px auto; /* Centering the template */
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Adds subtle shadow */
+  background-color: #ffffff; /* Consider your SPA's color scheme */
+  border-radius: 8px; /* Soft rounded corners */
 }
 
 .drop-area:hover {
   border-color: #ff6b6b; /* Change border color on hover for visual feedback */
 }
 
-/* MODERN TEMPLATE STYLES - ENHANCED VISUALS FOR MODERN TEMPLATE */
+/* Modern Template Style */
 
 /* Basic styling for the modern template container */
 .modern {
@@ -461,7 +486,7 @@ html {
   font-size: 1.1rem; /* Font size for readability */
 }
 
-/* MINIMALISTIC TEMPLATE STYLES - SIMPLIFIED AND CLEAN DESIGN */
+/* Minimalistic template style */
 
 /* Basic styling for the minimalistic template container */
 .minimalistic {
@@ -546,6 +571,89 @@ html {
   margin-bottom: 10px; /* Space between list items */
   font-size: 1.1rem; /* Consistent font size with other list items */
 }
+/* Professional template style */
+/* Base styling for the Professional template */
+.professional {
+  font-family: "Roboto", sans-serif; /* Ensures consistency and readability */
+  color: #333; /* Primary text color for better readability */
+  background-color: #ffffff; /* Clean background */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  max-width: 800px; /* Max width for readability */
+  margin: auto; /* Center align the template */
+  padding: 20px; /* Padding around the content */
+  border-radius: 8px; /* Softens the edges */
+}
+
+/* Header styles */
+.professional .professional-header {
+  text-align: center;
+  padding: 20px 0;
+  border-bottom: 2px solid #eaeaea; /* Subtle separator */
+}
+
+.professional-header h1,
+.professional-header h2 {
+  margin: 0;
+  padding: 5px 0;
+}
+
+.professional-header h1 {
+  font-size: 28px; /* Slightly larger for emphasis */
+  font-weight: 700; /* Bold for the name */
+}
+
+.professional-header h2 {
+  font-size: 22px;
+  color: #666; /* Lighter for contrast */
+  font-weight: 400; /* Regular font weight for the title */
+}
+
+/* Contact Info */
+.professional .professional-contact-info {
+  padding: 20px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.professional-contact-info p,
+.professional-contact-info a {
+  /* Including links for consistency */
+  margin: 10px 0;
+  color: #333; /* Ensuring links are not the default blue */
+  text-decoration: none; /* No underlines for a cleaner look */
+}
+
+/* Section headers */
+.professional-section {
+  padding: 15px;
+  margin-top: 20px;
+}
+
+.professional-experience,
+.professional-education {
+  border-top: 2px solid #eaeaea; /* Separates sections subtly */
+}
+
+.professional-experience h3,
+.professional-education h3 {
+  font-size: 20px;
+  color: #333;
+  margin-top: 20px; /* Added space above section titles */
+}
+
+/* List items */
+.professional-experience ul,
+.professional-education ul {
+  list-style: none; /* Cleaner look */
+  padding: 0;
+}
+
+.professional-experience li,
+.professional-education li {
+  margin-bottom: 15px; /* Increased spacing for readability */
+  font-size: 16px;
+  line-height: 1.5; /* Improved line spacing for readability */
+}
 
 /* EXPERIENCE BLOCK STYLES IN MINIMALISTIC TEMPLATE */
 
@@ -623,8 +731,16 @@ html {
 
 /* Specifically style the 'Load CV' button */
 .load-cv-btn {
-  padding: 0.3rem 1rem; /* Smaller padding to align with 'Sign Out' button */
+  padding: 0.5rem 1rem; /* Smaller padding to align with 'Sign Out' button */
   font-size: 0.9rem; /* Smaller font size for a balanced look */
+}
+
+.load-cv-btn,
+.reset-cv-btn,
+.sign-out-btn {
+  font-size: 0.9rem; /* Adjust font size to match .nav-link */
+  margin: 0 5px; /* Provides spacing between buttons */
+  text-align: center; /* Ensures text is centered within the buttons */
 }
 
 .save-cv-btn {
@@ -737,4 +853,28 @@ h2 {
     margin: 10% auto; /* Increased margin for better visual separation */
     padding: 20px; /* Adjusted padding for screen size */
   }
+}
+
+/* Adjust button from the header for consistency */
+.load-cv-btn,
+.reset-cv-btn,
+.sign-out-btn {
+  padding: 0.5rem 1rem; /* Standardized padding */
+  font-size: 1rem; /* Standardized font size */
+  margin-left: 0.5rem; /* Adds spacing between buttons */
+  background-color: #ff6b6b; /* Standardized background color */
+  color: white; /* Text color */
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+.load-cv-btn:hover,
+.reset-cv-btn:hover,
+.sign-out-btn:hover {
+  background-color: #c33333; /* Darker background color on hover */
+}
+
+body {
+  line-height: 1.6;
 }
