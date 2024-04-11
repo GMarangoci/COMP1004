@@ -298,22 +298,31 @@
       </section>
     </main>
 
+    <!-- LOGIN SECTION: Contains form for logging into an account, hidden by default -->
     <main id="logIn" class="page-section" style="display: none">
       <section class="login-container">
         <h1 class="login-title">Log In to Your Account</h1>
-        <!-- Add id="login-form" to the form element -->
         <form class="login-form" id="login-form">
           <label for="login-email">Email:</label>
           <input type="email" id="login-email" name="login-email" required />
+
           <label for="login-password">Password:</label>
           <input type="password" id="login-password" name="login-password" required />
-          <button type="submit" class="btn">Log In</button>
+
+          <button type="submit" class="btn" style="margin-top: 20px">
+            Log In
+          </button>
+          <!-- FORGOT PASSWORD PROMPT -->
+          <p class="auth-prompt">
+            Forgot your password?
+            <a href="#" id="reset-password" class="auth-link">Reset password</a>
+          </p>
+          <!-- REGISTRATION PROMPT: Link to navigate to the registration section -->
+          <p class="auth-prompt">
+            Don't have an account?
+            <a href="#" class="auth-link" onclick="navigateTo('register'); return false;">Register here</a>
+          </p>
         </form>
-        <!-- REGISTRATION PROMPT: Link to navigate to the registration section -->
-        <p class="register-prompt">
-          Don't have an account?
-          <a href="#" class="nav-link" onclick="navigateTo('register'); return false;">Register here</a>
-        </p>
       </section>
     </main>
 
@@ -331,13 +340,15 @@
           <label for="confirm-password">Confirm Password:</label>
           <input type="password" id="confirm-password" name="confirm-password" required />
 
-          <button type="submit" class="btn">Register</button>
-          <!-- LOGIN PROMPT: Link to navigate to the login section -->
-          <p class="register-prompt">
-            Already have an account?
-            <a href="#" class="nav-link" onclick="navigateTo('logIn'); return false;">Log in here</a>
-          </p>
+          <button type="submit" class="btn" style="margin-top: 20px">
+            Register
+          </button>
         </form>
+        <!-- LOGIN PROMPT: Link to navigate to the login section -->
+        <p class="auth-prompt">
+          Already have an account?
+          <a href="#" class="auth-link" onclick="navigateTo('logIn'); return false;">Log in here</a>
+        </p>
       </section>
     </main>
 
@@ -354,6 +365,7 @@
     import {
       getAuth,
       createUserWithEmailAndPassword,
+      sendPasswordResetEmail,
     } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-auth.js";
     import {
       getStorage,
@@ -426,6 +438,36 @@
           modal.style.display = "none"; // Hide modal if clicked outside of it
         }
       };
+      // Event listener to the "Reset password" link
+      const resetPasswordLink = document.getElementById("reset-password");
+      if (resetPasswordLink) {
+        resetPasswordLink.addEventListener("click", function (event) {
+          event.preventDefault(); // Prevent the link from navigating.
+
+          const emailAddress = document
+            .getElementById("login-email")
+            .value.trim();
+
+          if (!emailAddress) {
+            alert("Please enter your email address in the email field.");
+            return;
+          }
+
+          // Call the sendPasswordResetEmail function directly with the auth object
+          sendPasswordResetEmail(auth, emailAddress)
+            .then(() => {
+              alert("Password reset email sent. Please check your inbox.");
+            })
+            .catch((error) => {
+              const errorMessage = error.message;
+              alert(
+                `Failed to send password reset email. Error: ${errorMessage}`
+              );
+            });
+        });
+      } else {
+        console.error("Reset password link not found");
+      }
     });
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
@@ -578,7 +620,6 @@
         alert("Failed to delete CV. Please try again."); // Notify user of failure to delete CV
       }
     }
-
 
     // Function that populates form fields with data from the selected CV
     function populateFieldsWithData(cvData) {

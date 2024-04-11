@@ -878,3 +878,36 @@ h2 {
 body {
   line-height: 1.6;
 }
+
+.forgot-password-prompt,
+.register-prompt {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.forgot-password-prompt a,
+.register-prompt a {
+  color: #ff6b6b;
+  text-decoration: none;
+}
+
+.forgot-password-prompt a:hover,
+.register-prompt a:hover {
+  text-decoration: underline; /* This adds an underline on hover, for a visual cue */
+}
+
+/* Authentication Prompts Styling */
+.auth-prompt {
+  text-align: center; /* Centers the prompt text */
+  margin: 0.5rem 0; /* Adds margin around the prompt for spacing */
+}
+
+.auth-link {
+  color: #ff6b6b; /* The color you want for your link text */
+  text-decoration: none; /* Removes underline from links */
+  font-weight: bold; /* Makes the link text bold */
+}
+
+.auth-link:hover {
+  text-decoration: underline; /* Underlines link text on hover for interactivity */
+}
