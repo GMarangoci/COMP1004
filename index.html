@@ -695,10 +695,16 @@
 
           // Notify the user of successful registration and redirect
           alert("Registration successful. Redirecting to login page.");
-          setTimeout(() => navigateTo("logIn"), 500); // Slight delay for UX before redirect
+          navigateTo("logIn"); // Redirect to the login section without delay
         } catch (error) {
           console.error("Registration error: ", error); // Log any registration errors
-          alert("Failed to register: " + error.message); // Notify the user of the failure
+          // Check for the "email already in use" error
+          if (error.code === "auth/email-already-in-use") {
+            alert("This email is already in use. Redirecting to the login page.");
+            navigateTo("logIn"); // Redirect to the login section
+          } else {
+            alert("Failed to register: " + error.message); // Notify the user of the failure
+          }
         }
       });
 
