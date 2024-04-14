@@ -911,3 +911,37 @@ body {
 .auth-link:hover {
   text-decoration: underline; /* Underlines link text on hover for interactivity */
 }
+/* Password Strengh Styling */
+#password-strength {
+  padding: 8px 12px;
+  color: white;
+  font-weight: bold;
+  border-radius: 20px;
+  margin-top: 10px;
+  display: inline-block;
+  font-size: 14px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.password-strength-weak {
+  background-color: #ff4b47; /* Brighter red for weak password */
+  box-shadow: 0 2px 4px rgba(255, 75, 71, 0.4);
+}
+
+.password-strength-moderate {
+  background-color: #f9a602; /* Brighter orange for moderate password */
+  box-shadow: 0 2px 4px rgba(249, 166, 2, 0.4);
+}
+
+.password-strength-strong {
+  background-color: #28a745; /* Brighter green for strong password */
+  box-shadow: 0 2px 4px rgba(40, 167, 69, 0.4);
+}
+
+/* Transition effects for the indicator to smoothly transition between states */
+.password-strength-weak,
+.password-strength-moderate,
+.password-strength-strong {
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}

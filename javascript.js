@@ -739,6 +739,41 @@ function addEducationField(edu) {
 
   container.appendChild(newField); // Append the new education entry to the specified container.
 
-  // After dynamically adding a new education field, ensure that event listeners are attached to new inputs for capturing real-time updates.
+  // After adding a new field, reinitialize event listeners for input fields to capture real-time updates.
   addFieldEventListeners();
 }
+// Password Strengh Indicator
+// Listen for user input on the registration password field
+document
+  .getElementById("register-password")
+  .addEventListener("input", function (e) {
+    // Grab the element that will display the password's strength
+    const passwordStrengthText = document.getElementById("password-strength");
+
+    // Define a regex for a strong password: minimum 8 characters, at least one uppercase letter, one lowercase letter, one number, and one special character
+    const strongPasswordRegex = new RegExp(
+      "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"
+    );
+
+    // Initially, remove any existing classes on the password strength indicator
+    passwordStrengthText.className = "";
+
+    // Check if the input matches the strong password criteria
+    if (strongPasswordRegex.test(e.target.value)) {
+      // Update the text and apply a class to indicate a strong password
+      passwordStrengthText.textContent = "Strong";
+      passwordStrengthText.classList.add("password-strength-strong");
+    }
+    // If not strong, check if the password length is at least 6 characters for a moderate strength
+    else if (e.target.value.length >= 6) {
+      // Update the text and apply a class to indicate a moderate password
+      passwordStrengthText.textContent = "Moderate";
+      passwordStrengthText.classList.add("password-strength-moderate");
+    }
+    // If it doesn't meet any of the above criteria, consider it a weak password
+    else {
+      // Update the text and apply a class to indicate a weak password
+      passwordStrengthText.textContent = "Weak";
+      passwordStrengthText.classList.add("password-strength-weak");
+    }
+  });

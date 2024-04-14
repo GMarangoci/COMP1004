@@ -336,6 +336,7 @@
 
           <label for="register-password">Password:</label>
           <input type="password" id="register-password" name="register-password" required />
+          <div id="password-strength"></div> <!-- Password strength indicator -->
 
           <label for="confirm-password">Confirm Password:</label>
           <input type="password" id="confirm-password" name="confirm-password" required />
@@ -438,6 +439,7 @@
           modal.style.display = "none"; // Hide modal if clicked outside of it
         }
       };
+
       // Event listener to the "Reset password" link
       const resetPasswordLink = document.getElementById("reset-password");
       if (resetPasswordLink) {
