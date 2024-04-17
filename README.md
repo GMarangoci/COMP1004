@@ -1,10 +1,10 @@
 # CVGuide Resume Builder - Single Page Application (SPA)
 
-CareerCanvas is a university project aimed at democratizing the process of resume creation, making it accessible, cost-free, and simple for job seekers and professionals across all industries. Recognizing the barriers presented by expensive and complex resume-building tools, CareerCanvas provides a user-friendly platform where individuals can effortlessly craft professional resumes without financial burden or technical challenges. This project is developed as a Single Page Application (SPA), fulfilling a main requirement for the Comp 1004 coursework.
+CVGuide is a university project aimed at democratizing the process of resume creation, making it accessible, cost-free, and simple for job seekers and professionals across all industries. Recognizing the barriers presented by expensive and complex resume-building tools, CVGuide provides a user-friendly platform where individuals can effortlessly craft professional resumes without financial burden or technical challenges. This project is developed as a Single Page Application (SPA), fulfilling a main requirement for the Comp 1004 coursework.
 
 ## Background
 
-The inception of CareerCanvas was motivated by a personal encounter with the high costs and complexities of existing online resume builders. Leveraging my computer science education, I set out to develop CareerCanvas - a practical tool designed to alleviate these challenges, thereby supporting job seekers in presenting their best selves to potential employers.
+The inception of CVGuide was motivated by a personal encounter with the high costs and complexities of existing online resume builders. Leveraging my computer science education, I set out to develop CVGuide - a practical tool designed to alleviate these challenges, thereby supporting job seekers in presenting their best selves to potential employers.
 
 ## Key Features
 
