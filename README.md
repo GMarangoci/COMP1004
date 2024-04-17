@@ -1,6 +1,6 @@
 # CVGuide Resume Builder - Single Page Application (SPA)
 
-CVGuide is a university project aimed at democratizing the process of resume creation, making it accessible, cost-free, and simple for job seekers and professionals across all industries. Recognizing the barriers presented by expensive and complex resume-building tools, CVGuide provides a user-friendly platform where individuals can effortlessly craft professional resumes without financial burden or technical challenges. This project is developed as a Single Page Application (SPA), fulfilling a main requirement for the Comp 1004 coursework.
+CVGuide is a university project aimed at democratizing the process of resume creation, making it accessible, cost-free, and simple for job seekers and professionals across all industries. Recognizing the barriers presented by expensive and complex resume-building tools, CVGuide provides a user-friendly platform where individuals can effortlessly craft professional resumes without financial burden or technical challenges. This project is developed as a Single Page Application (SPA), fulfilling the main requirement for the Comp 1004 coursework.
 
 ## Background
 
