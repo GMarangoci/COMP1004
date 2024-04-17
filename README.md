@@ -4,7 +4,7 @@ CVGuide is a university project aimed at democratizing the process of resume cre
 
 ## Background
 
-The inception of CVGuide was motivated by a personal encounter with the high costs and complexities of existing online resume builders. Leveraging my computer science education, I set out to develop CVGuide - a practical tool designed to alleviate these challenges, thereby supporting job seekers in presenting their best selves to potential employers.
+The inception of CVGuide was motivated by a personal encounter with the high costs and complexities of existing online resume builders. Leveraging my computer science education, I set out to develop CVGuide - a practical tool designed to alleviate these challenges, thereby supporting job seekers in presenting their best selfes to potential employers.
 
 ## Key Features
 
