@@ -25,6 +25,7 @@ The inception of CareerCanvas was motivated by a personal encounter with the hig
 - **User Authentication and Management**:
   - **Registration and Login**: Create accounts for a personalized experience and resume management.
   - **Password Reset**: Secure account recovery options.
+  - **Password Strength Indicator**: Real-time feedback on password strength during registration, encouraging users to create strong and secure passwords.
 
 - **User CV Management**:
   - **Save CV**: Keep resumes for future access and editing.
