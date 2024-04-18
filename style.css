@@ -757,7 +757,7 @@ html {
 .modal {
   display: none;
   position: fixed;
-  z-index: 1000; /* Increase z-index for higher stack order */
+  z-index: 1000; /* Ensures the modal stays on top of other content */
   left: 0;
   top: 0;
   width: 100%;

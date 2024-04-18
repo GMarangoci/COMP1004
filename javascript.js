@@ -143,8 +143,6 @@ function displayMinimalisticTemplate() {
   resumeDisplay.innerHTML = "<div>Your Minimalistic Template HTML here</div>";
 }
 
-// TEMPLATE SELECTION FUNCTIONALITY
-
 // Chooses which template to display based on user's selection
 function selectTemplate(templateName) {
   // Hides all resume templates before displaying the selected one
