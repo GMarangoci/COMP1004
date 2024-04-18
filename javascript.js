@@ -105,8 +105,6 @@ function removeExperience(element) {
   element.parentElement.remove(); // Remove experience field.
 }
 
-// BUILD RESUME PAGE FUNCTIONALITY
-
 // Adding functionality for the 'Add Education' button.
 document.getElementById("add-education").addEventListener("click", function () {
   educationCount++; // Increment the counter each time a new education entry is added.
