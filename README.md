@@ -11,6 +11,7 @@ The inception of CVGuide was motivated by a personal encounter with the high cos
 - **Template Selection**: Users can choose from Modern, Minimalistic, and Professional templates for personalized resumes.
 
 - **Dynamic Content Editing**:
+
   - **Personal Information Section**: Input full name, job title, email, phone number, and LinkedIn URL.
   - **Personal Summary**: A dedicated area for users to write a personal summary or objective.
   - **Work Experience**: Add, edit, and remove work experiences, including company name, role, start and end dates, plus a checkbox for ongoing roles.
@@ -19,15 +20,18 @@ The inception of CVGuide was motivated by a personal encounter with the high cos
   - **Real-time Preview**: View resume updates instantly within the chosen template.
 
 - **Resume Download and Print Options**:
+
   - **Download Resume as PDF**: For easy sharing and application submissions.
   - **Print Resume**: Directly from the browser for physical copies.
 
 - **User Authentication and Management**:
+
   - **Registration and Login**: Create accounts for a personalized experience and resume management.
   - **Password Reset**: Secure account recovery options.
   - **Password Strength Indicator**: Real-time feedback on password strength during registration, encouraging users to create strong and secure passwords.
 
 - **User CV Management**:
+
   - **Save CV**: Keep resumes for future access and editing.
   - **Load CV**: Access and modify previously saved resumes.
   - **Delete CV**: Remove unwanted resumes from the account.
